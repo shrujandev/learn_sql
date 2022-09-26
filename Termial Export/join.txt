@@ -1,0 +1,370 @@
+PowerShell 7.2.6
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/powershell
+Type 'help' to get help.
+
+Loading personal and system profiles took 1665ms.
+  ~  master  ≢  ?54    cd e:
+  E:\    cd .\xampp\
+  xampp    cd .\mysql\
+  mysql    cd .\bin\
+  bin    .\mysql -u root -p
+Enter password:
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> select * from client;
++-----------+---------------------+-----------+
+| client_id | client_name         | branch_id |
++-----------+---------------------+-----------+
+|       400 | Dunmore Highschool  |         2 |
+|       401 | Lackawana Country   |         2 |
+|       402 | FedEx               |         3 |
+|       403 | John Daly Law, LLC  |         3 |
+|       404 | Scranton Whitepages |         2 |
+|       405 | Times Newspaper     |         3 |
+|       406 | FedEx               |         2 |
++-----------+---------------------+-----------+
+7 rows in set (0.006 sec)
+
+MariaDB [company]> select client_name as Client_Branch_Name from client union select branch_name from branch;
++---------------------+
+| Client_Branch_Name  |
++---------------------+
+| Dunmore Highschool  |
+| Lackawana Country   |
+| FedEx               |
+| John Daly Law, LLC  |
+| Scranton Whitepages |
+| Times Newspaper     |
+| Corporate           |
+| Scranton            |
+| Stamford            |
++---------------------+
+9 rows in set (0.013 sec)
+
+MariaDB [company]> select * from branch
+    -> ;
++-----------+-------------+--------+----------------+
+| branch_id | branch_name | mgr_id | mgr_start_date |
++-----------+-------------+--------+----------------+
+|         1 | Corporate   |    100 | 2006-02-09     |
+|         2 | Scranton    |    102 | 1992-04-06     |
+|         3 | Stamford    |    106 | 1998-02-13     |
++-----------+-------------+--------+----------------+
+3 rows in set (0.000 sec)
+
+MariaDB [company]> select employee.emp_id , employee.first_name,branch.branch_name
+    -> FROM employee
+    -> JOIN branch
+    -> ON employee.emp_id = branch.mgr_id;
++--------+------------+-------------+
+| emp_id | first_name | branch_name |
++--------+------------+-------------+
+|    100 | David      | Corporate   |
+|    102 | Michael    | Scranton    |
+|    106 | Josh       | Stamford    |
++--------+------------+-------------+
+3 rows in set (0.008 sec)
+
+MariaDB [company]> select employee.emp_id as EMPID, employee.first_name as FNAME,branch.branch_name as BRANCH
+    -> FROM employee
+    -> JOIN branch
+    -> ON employee.emp_id = branch.mgr_id;
++-------+---------+-----------+
+| EMPID | FNAME   | BRANCH    |
++-------+---------+-----------+
+|   100 | David   | Corporate |
+|   102 | Michael | Scranton  |
+|   106 | Josh    | Stamford  |
++-------+---------+-----------+
+3 rows in set (0.000 sec)
+
+MariaDB [company]> select employee.emp_id as EMPID, employee.first_name as FNAME,branch.branch_name as BRANCH from employee LEFT JOIN branch ON employee.emp_id = branch.mgr_id;
++-------+---------+-----------+
+| EMPID | FNAME   | BRANCH    |
++-------+---------+-----------+
+|   100 | David   | Corporate |
+|   102 | Michael | Scranton  |
+|   106 | Josh    | Stamford  |
+|   101 | Jan     | NULL      |
+|   103 | Angela  | NULL      |
+|   104 | Kelly   | NULL      |
+|   105 | Stanley | NULL      |
+|   107 | Andy    | NULL      |
+|   108 | Jim     | NULL      |
++-------+---------+-----------+
+9 rows in set (0.001 sec)
+
+MariaDB [company]> select employee.emp_id as EMPID, employee.first_name as FNAME,branch.branch_name as BRANCH from employee RIGHT JOIN branch ON employee.emp_id = branch.mgr_id;
++-------+---------+-----------+
+| EMPID | FNAME   | BRANCH    |
++-------+---------+-----------+
+|   100 | David   | Corporate |
+|   102 | Michael | Scranton  |
+|   106 | Josh    | Stamford  |
++-------+---------+-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [company]> insert into branch values(4,"Buffalo",NULL,NULL);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company]> select employee.emp_id as EMPID, employee.first_name as FNAME,branch.branch_name as BRANCH from employee LEFT JOIN branch ON employee.emp_id = branch.mgr_id;
++-------+---------+-----------+
+| EMPID | FNAME   | BRANCH    |
++-------+---------+-----------+
+|   100 | David   | Corporate |
+|   102 | Michael | Scranton  |
+|   106 | Josh    | Stamford  |
+|   101 | Jan     | NULL      |
+|   103 | Angela  | NULL      |
+|   104 | Kelly   | NULL      |
+|   105 | Stanley | NULL      |
+|   107 | Andy    | NULL      |
+|   108 | Jim     | NULL      |
++-------+---------+-----------+
+9 rows in set (0.001 sec)
+
+MariaDB [company]> select employee.emp_id as EMPID, employee.first_name as FNAME,branch.branch_name as BRANCH from employee RIGHT JOIN branch ON employee.emp_id = branch.mgr_id;
++-------+---------+-----------+
+| EMPID | FNAME   | BRANCH    |
++-------+---------+-----------+
+|   100 | David   | Corporate |
+|   102 | Michael | Scranton  |
+|   106 | Josh    | Stamford  |
+|  NULL | NULL    | Buffalo   |
++-------+---------+-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [company]> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| branch            |
+| branch_supplier   |
+| client            |
+| employee          |
+| works_with        |
++-------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]> select * from employee;
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.000 sec)
+
+MariaDB [company]> select * from works_with;
++--------+-----------+-------------+
+| emp_id | client_id | total_sales |
++--------+-----------+-------------+
+|    102 |       401 |      267000 |
+|    102 |       406 |       15000 |
+|    105 |       400 |       55000 |
+|    105 |       404 |       33000 |
+|    105 |       406 |          13 |
+|    107 |       403 |        5000 |
+|    107 |       405 |       26000 |
+|    108 |       402 |       22500 |
+|    108 |       403 |       12000 |
++--------+-----------+-------------+
+9 rows in set (0.004 sec)
+
+MariaDB [company]> select first_name as Name from employee join works_with where total_sales >=50000;
++---------+
+| Name    |
++---------+
+| David   |
+| David   |
+| Jan     |
+| Jan     |
+| Michael |
+| Michael |
+| Angela  |
+| Angela  |
+| Kelly   |
+| Kelly   |
+| Stanley |
+| Stanley |
+| Josh    |
+| Josh    |
+| Andy    |
+| Andy    |
+| Jim     |
+| Jim     |
++---------+
+18 rows in set (0.001 sec)
+
+MariaDB [company]> select employee.first_name as Name ,employee.last_name from employee.fir join works_with on works_with.total_sales >=50000;
+ERROR 1146 (42S02): Table 'employee.fir' doesn't exist
+MariaDB [company]> select employee.first_name as Name ,employee.last_name from employee join works_with on works_with.total_sales >=50000;
++---------+-----------+
+| Name    | last_name |
++---------+-----------+
+| David   | Wallace   |
+| David   | Wallace   |
+| Jan     | Levinson  |
+| Jan     | Levinson  |
+| Michael | Scott     |
+| Michael | Scott     |
+| Angela  | Martin    |
+| Angela  | Martin    |
+| Kelly   | Kapoor    |
+| Kelly   | Kapoor    |
+| Stanley | Hudson    |
+| Stanley | Hudson    |
+| Josh    | Porter    |
+| Josh    | Porter    |
+| Andy    | Bernard   |
+| Andy    | Bernard   |
+| Jim     | Halpert   |
+| Jim     | Halpert   |
++---------+-----------+
+18 rows in set (0.001 sec)
+
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where works_with.total_sales >=50000);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Michael    | Scott     |
+| Stanley    | Hudson    |
++------------+-----------+
+2 rows in set (0.003 sec)
+
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where works_with.total_sales >50000);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Michael    | Scott     |
+| Stanley    | Hudson    |
++------------+-----------+
+2 rows in set (0.001 sec)
+
+Mupdate total_sales=130000 in works_with where emp_id=105 and client_id=406;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '130000 in works_with where emp_id=105 and client_id=406' at line 1
+MariaDB [company]> UPDATE works_with
+    -> set total_sales=130000 where emp_id=105 and client_id=406;
+Query OK, 1 row affected (0.012 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where works_with.total_sales >50000);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Michael    | Scott     |
+| Stanley    | Hudson    |
++------------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [company]> select * from works_with;
++--------+-----------+-------------+
+| emp_id | client_id | total_sales |
++--------+-----------+-------------+
+|    102 |       401 |      267000 |
+|    102 |       406 |       15000 |
+|    105 |       400 |       55000 |
+|    105 |       404 |       33000 |
+|    105 |       406 |      130000 |
+|    107 |       403 |        5000 |
+|    107 |       405 |       26000 |
+|    108 |       402 |       22500 |
+|    108 |       403 |       12000 |
++--------+-----------+-------------+
+9 rows in set (0.000 sec)
+
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where works_with.total_sales >50000);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Michael    | Scott     |
+| Stanley    | Hudson    |
++------------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where works_with.total_sales >=50000);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Michael    | Scott     |
+| Stanley    | Hudson    |
++------------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where sum(works_with.total_sales) group by works_with.emp_id >=50000);
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where sum(works_with.total_sales) >= 150000 group by works_with.emp_id);
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where sum(works_with.total_sales group by works_with.emp_id) >=50000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'group by works_with.emp_id) >=50000)' at line 1
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where sum(works_with.total_sales)>=50000);
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with where group by works_with.emp_id sum(works_with.total_sales)>=50000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'group by works_with.emp_id sum(works_with.total_sales)>=50000)' at line 1
+MariaDB [company]> select employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with having sum(works_with.total_sales)>=50000);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| Michael    | Scott     |
++------------+-----------+
+1 row in set (0.005 sec)
+
+MariaDB [company]> select employee.emp_id,employee.first_name , employee.last_name from employee where employee.emp_id IN(Select works_with.emp_id from works_with having sum(works_with.total_sales)>=50000);
++--------+------------+-----------+
+| emp_id | first_name | last_name |
++--------+------------+-----------+
+|    102 | Michael    | Scott     |
++--------+------------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [company]> select employee.emp_id,employee.first_name , employee.last_name from employee where group by employee.emp_id IN(Select works_with.emp_id from works_with having sum(works_with.total_sales)>=50000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'group by employee.emp_id IN(Select works_with.emp_id from works_with having s...' at line 1
+MariaDB [company]> select employee.emp_id,employee.first_name , employee.last_name from employee where group by employee.emp_id IN(Select works_with.emp_id from works_with having sum(works_with.total_sales)>=50000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'group by employee.emp_id IN(Select works_with.emp_id from works_with having s...' at line 1
+MariaDB [company]> select employee.emp_id, employee.first_name, employee.last_name from(employee join works_with on employee.emp_id=works_with.emp_id) where group by employee.emp_id having sum(works_with.total_sales)>=150000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'group by employee.emp_id having sum(works_with.total_sales)>=150000' at line 1
+MariaDB [company]> select employee.emp_id, employee.first_name, employee.last_name from(employee join works_with on employee.emp_id=works_with.emp_id) group by employee.emp_id having sum(works_with.total_sales)>=150000;
++--------+------------+-----------+
+| emp_id | first_name | last_name |
++--------+------------+-----------+
+|    102 | Michael    | Scott     |
+|    105 | Stanley    | Hudson    |
++--------+------------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [company]> select client.client_id , client.client_name from client where client.branch_id = (Select branch.branch_id from branch where branch.mgr id=102);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'id=102)' at line 1
+MariaDB [company]> select client.client_id , client.client_name from client where client.branch_id = (select branch.branch_id from branch where branch.mgr id=102);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'id=102)' at line 1
+MariaDB [company]> select client.client_id , client.client_name from client where client.branch_id = (select branch.branch_id from branch where branch.mgr_id=102);
++-----------+---------------------+
+| client_id | client_name         |
++-----------+---------------------+
+|       400 | Dunmore Highschool  |
+|       401 | Lackawana Country   |
+|       404 | Scranton Whitepages |
+|       406 | FedEx               |
++-----------+---------------------+
+4 rows in set (0.004 sec)
+
+MariaDB [company]>
