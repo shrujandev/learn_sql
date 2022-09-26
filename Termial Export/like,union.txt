@@ -1,0 +1,546 @@
+PowerShell 7.2.6
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/powershell
+Type 'help' to get help.
+
+Loading personal and system profiles took 2666ms.
+  ~  master  ≢  ?54    cd e:
+  E:\    cd .\xampp\
+  xampp    cd .\bin\
+Set-Location: Cannot find path 'E:\xampp\bin\' because it does not exist.
+  xampp    cd .\mysql\
+  mysql    cd .\bin\
+  bin    .\mysql -u root -p
+Enter password:
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+  bin   
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show db
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'db' at line 1
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| railwayticket_415  |
+| test               |
++--------------------+
+7 rows in set (0.053 sec)
+
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> select * from company
+    -> ;
+ERROR 1146 (42S02): Table 'company.company' doesn't exist
+MariaDB [company]> company.tables
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'company.tables' at line 1
+MariaDB [company]> show tables
+    -> ;
++-------------------+
+| Tables_in_company |
++-------------------+
+| branch            |
+| branch_supplier   |
+| client            |
+| employee          |
+| works_with        |
++-------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]> select count(super_id);
+ERROR 1054 (42S22): Unknown column 'super_id' in 'field list'
+MariaDB [company]> select * from employee;
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.110 sec)
+
+MariaDB [company]> select count(super_id) from employee
+    -> ;
++-----------------+
+| count(super_id) |
++-----------------+
+|               8 |
++-----------------+
+1 row in set (0.005 sec)
+
+MariaDB [company]> select count(emp_id) from employee
+    -> ;
++---------------+
+| count(emp_id) |
++---------------+
+|             9 |
++---------------+
+1 row in set (0.006 sec)
+
+MariaDB [company]> '
+    '> ;
+    '> ;
+    '> ;
+    '> ;
+    '> ;
+    '> Bye
+Ctrl-C -- exit!
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> `
+    `>
+    `>
+    `>
+    `>
+    `> exi
+    `> ;
+    `> ;
+    `> ;
+    `> ;
+    `>
+    `>
+    `>
+    `> ^Z
+    `> Bye
+Ctrl-C -- exit!
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> -- or #
+MariaDB [company]> " OR 1 = 1 -- -
+    ">
+    ">
+    ">
+    ">
+    ">
+    "> ckdsjhf
+    "> ByeCtrl-C -- exit!
+
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> 1' ORDER BY 1--+
+    '>
+    '>
+    '>
+    '>
+    '> Bye
+Ctrl-C -- exit!
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 12
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use comapny
+ERROR 1049 (42000): Unknown database 'comapny'
+MariaDB [(none)]> use compnay
+ERROR 1049 (42000): Unknown database 'compnay'
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> OR 1=1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'OR 1=1' at line 1
+MariaDB [company]> select avg(salary) from employee group by branch_id;
++-------------+
+| avg(salary) |
++-------------+
+| 180000.0000 |
+|  65500.0000 |
+|  71333.3333 |
++-------------+
+3 rows in set (0.006 sec)
+
+MariaDB [company]> select sum(total_sales), emp_id from works_with group by emp_id;
++------------------+--------+
+| sum(total_sales) | emp_id |
++------------------+--------+
+|           282000 |    102 |
+|            88013 |    105 |
+|            31000 |    107 |
+|            34500 |    108 |
++------------------+--------+
+4 rows in set (0.018 sec)
+
+MariaDB [company]> select sum(total_sales), emp_id from works_with group by emp_id;
++------------------+--------+
+| sum(total_sales) | emp_id |
++------------------+--------+
+|           282000 |    102 |
+|            88013 |    105 |
+|            31000 |    107 |
+|            34500 |    108 |
++------------------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [company]> show tables;otal_sgles), emp_id from works_wi+-------------------+
+| Tables_in_company |
++-------------------+
+| branch            |
+| branch_supplier   |
+| client            |
+| employee          |
+| works_with        |
++-------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]> select * from works_with;'
++--------+-----------+-------------+
+| emp_id | client_id | total_sales |
++--------+-----------+-------------+
+|    102 |       401 |      267000 |
+|    102 |       406 |       15000 |
+|    105 |       400 |       55000 |
+|    105 |       404 |       33000 |
+|    105 |       406 |          13 |
+|    107 |       403 |        5000 |
+|    107 |       405 |       26000 |
+|    108 |       402 |       22500 |
+|    108 |       403 |       12000 |
++--------+-----------+-------------+
+9 rows in set (0.000 sec)
+
+    '>
+    '>
+    '> sel
+    '>
+    '>
+    '> ;;;
+    '> ;
+    '> ;
+    '> ;;;;
+    '> zz
+    '> z/
+    '>
+    '>
+    '>
+    '> 1
+    '> 1
+    '> 2
+    '>
+    '>
+    '>  ```Bye
+Ctrl-C -- exit!
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 13
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use comapny
+ERROR 1049 (42000): Unknown database 'comapny'
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> show tables
+    -> ;
++-------------------+
+| Tables_in_company |
++-------------------+
+| branch            |
+| branch_supplier   |
+| client            |
+| employee          |
+| works_with        |
++-------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]> select * from client;
++-----------+---------------------+-----------+
+| client_id | client_name         | branch_id |
++-----------+---------------------+-----------+
+|       400 | Dunmore Highschool  |         2 |
+|       401 | Lackawana Country   |         2 |
+|       402 | FedEx               |         3 |
+|       403 | John Daly Law, LLC  |         3 |
+|       404 | Scranton Whitepages |         2 |
+|       405 | Times Newspaper     |         3 |
+|       406 | FedEx               |         2 |
++-----------+---------------------+-----------+
+7 rows in set (0.019 sec)
+
+MariaDB [company]> select * from branch;
++-----------+-------------+--------+----------------+
+| branch_id | branch_name | mgr_id | mgr_start_date |
++-----------+-------------+--------+----------------+
+|         1 | Corporate   |    100 | 2006-02-09     |
+|         2 | Scranton    |    102 | 1992-04-06     |
+|         3 | Stamford    |    106 | 1998-02-13     |
++-----------+-------------+--------+----------------+
+3 rows in set (0.021 sec)
+
+MariaDB [company]> select * from branch_supplier;
++-----------+---------------------+------------------+
+| branch_id | supplier_name       | supply_type      |
++-----------+---------------------+------------------+
+|         2 | Hammer Mill         | Paper            |
+|         2 | J.T. Forms & Labels | Custom Forms     |
+|         2 | Uni-ball            | Writing Utensils |
+|         3 | Hammer Mill         | Paper            |
+|         3 | Patriot Paper       | Paper            |
+|         3 | Stamford Lables     | Custom Forms     |
+|         3 | Uni-ball            | Writing Utensils |
++-----------+---------------------+------------------+
+7 rows in set (0.023 sec)
+
+MariaDB [company]> select * from client where client_name like  "%LLC";
++-----------+--------------------+-----------+
+| client_id | client_name        | branch_id |
++-----------+--------------------+-----------+
+|       403 | John Daly Law, LLC |         3 |
++-----------+--------------------+-----------+
+1 row in set (0.006 sec)
+
+MariaDB [company]> select * from client where client_name like  "_LLC";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "LLC_";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "_LLC_";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "LLC";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "LLC%";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%LLC";
++-----------+--------------------+-----------+
+| client_id | client_name        | branch_id |
++-----------+--------------------+-----------+
+|       403 | John Daly Law, LLC |         3 |
++-----------+--------------------+-----------+
+1 row in set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%Buismess";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%Buisness";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%BUSINESS
+    "> ";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%BUSINESS";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%BUSINESS%";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%Label%";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like  "%Lebel%";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label%";
++-----------+---------------------+--------------+
+| branch_id | supplier_name       | supply_type  |
++-----------+---------------------+--------------+
+|         2 | J.T. Forms & Labels | Custom Forms |
++-----------+---------------------+--------------+
+1 row in set (0.000 sec)
+
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label_";
++-----------+---------------------+--------------+
+| branch_id | supplier_name       | supply_type  |
++-----------+---------------------+--------------+
+|         2 | J.T. Forms & Labels | Custom Forms |
++-----------+---------------------+--------------+
+1 row in set (0.000 sec)
+
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label__";
+Empty set (0.001 sec)
+
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label%" or %Lables%;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%Lables%' at line 1
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label%" or supplier_name like %Lables%;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%Lables%' at line 1
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label%" or supplier_name like "%Lables%";
++-----------+---------------------+--------------+
+| branch_id | supplier_name       | supply_type  |
++-----------+---------------------+--------------+
+|         2 | J.T. Forms & Labels | Custom Forms |
+|         3 | Stamford Lables     | Custom Forms |
++-----------+---------------------+--------------+
+2 rows in set (0.001 sec)
+
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label%" or "%Lables%";
++-----------+---------------------+--------------+
+| branch_id | supplier_name       | supply_type  |
++-----------+---------------------+--------------+
+|         2 | J.T. Forms & Labels | Custom Forms |
++-----------+---------------------+--------------+
+1 row in set, 5 warnings (0.003 sec)
+
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label%" or "%Lable%";
++-----------+---------------------+--------------+
+| branch_id | supplier_name       | supply_type  |
++-----------+---------------------+--------------+
+|         2 | J.T. Forms & Labels | Custom Forms |
++-----------+---------------------+--------------+
+1 row in set, 5 warnings (0.000 sec)
+
+MariaDB [company]> select * from branch_supplier where supplier_name like  "%Label%" or supplier_name like "%Lable%";
++-----------+---------------------+--------------+
+| branch_id | supplier_name       | supply_type  |
++-----------+---------------------+--------------+
+|         2 | J.T. Forms & Labels | Custom Forms |
+|         3 | Stamford Lables     | Custom Forms |
++-----------+---------------------+--------------+
+2 rows in set (0.000 sec)
+
+MariaDB [company]> select * from employee;
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "_10";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "_____10";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "____10";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "___10";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "__10";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "_10";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "_17";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "________17";
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+1 row in set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "________10";
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from employee where birth_day like "________17";
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+1 row in set (0.000 sec)
+
+MariaDB [company]> select * from client where client_name like "%school%";
++-----------+--------------------+-----------+
+| client_id | client_name        | branch_id |
++-----------+--------------------+-----------+
+|       400 | Dunmore Highschool |         2 |
++-----------+--------------------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [company]> select * from client where client_name like "%highschool%";
++-----------+--------------------+-----------+
+| client_id | client_name        | branch_id |
++-----------+--------------------+-----------+
+|       400 | Dunmore Highschool |         2 |
++-----------+--------------------+-----------+
+1 row in set (0.000 sec)
+
+MariaDB [company]> select employee.first_name AS employee_branch_name from employee union select branch.branch_name from branch;
++----------------------+
+| employee_branch_name |
++----------------------+
+| David                |
+| Jan                  |
+| Michael              |
+| Angela               |
+| Kelly                |
+| Stanley              |
+| Josh                 |
+| Andy                 |
+| Jim                  |
+| Corporate            |
+| Scranton             |
+| Stamford             |
++----------------------+
+12 rows in set (0.004 sec)
+
+MariaDB [company]>
