@@ -1,0 +1,303 @@
+  bin    .\mysql -u root -p && cls
+Enter password:
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+  bin    .\mysql -u root -p && cls
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use companu
+ERROR 1049 (42000): Unknown database 'companu'
+MariaDB [(none)]> use company;
+Database changed
+MariaDB [company]> select E.first_name as Employee_name,S.first_name as Supervisor from employee E ,employee S where E.super_id=s.emp_id;
++---------------+------------+
+| Employee_name | Supervisor |
++---------------+------------+
+| Jan           | David      |
+| Michael       | David      |
+| Angela        | Michael    |
+| Kelly         | Michael    |
+| Stanley       | Michael    |
+| Josh          | David      |
+| Andy          | Josh       |
+| Jim           | Josh       |
++---------------+------------+
+8 rows in set (0.140 sec)
+
+MariaDB [company]> select E.first_name as Employee_name,S.first_name as Supervisor from employee E ,employee S where E.super_id=s.emp_id;
++---------------+------------+
+| Employee_name | Supervisor |
++---------------+------------+
+| Jan           | David      |
+| Michael       | David      |
+| Angela        | Michael    |
+| Kelly         | Michael    |
+| Stanley       | Michael    |
+| Josh          | David      |
+| Andy          | Josh       |
+| Jim           | Josh       |
++---------------+------------+
+8 rows in set (0.001 sec)
+
+MariaDB [company]> select * from employee;
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.001 sec)
+
+MariaDB [company]> create table wc_info;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [company]> insert into wc_info (bname,cname) select B.branch_name,C.client_name from branch B.branch_id=C.branch_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.branch_id=C.branch_id' at line 1
+MariaDB [company]> create table wc_info
+    -> { bname varchar(255),
+    -> cname varchar(255)
+    -> };
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{ bname varchar(255),
+cname varchar(255)
+}' at line 2
+MariaDB [company]> create table wc_info
+    -> ( bname varchar(255),
+    -> cname varchar(255)
+    -> );
+Query OK, 0 rows affected (0.040 sec)
+
+MariaDB [company]> insert into wc_info (bname,cname) select B.branch_name,C.client_name from branch B.branch_id=C.branch_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.branch_id=C.branch_id' at line 1
+MariaDB [company]> insert into wc_info (bname,cname) select B.branch_name,C.client_name from branch B,Client C where B.branch_id=C.branch_id;
+Query OK, 7 rows affected (0.045 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+MariaDB [company]> select * from wc_infol;
+ERROR 1146 (42S02): Table 'company.wc_infol' doesn't exist
+MariaDB [company]> select * from wc_info;
++----------+---------------------+
+| bname    | cname               |
++----------+---------------------+
+| Scranton | Dunmore Highschool  |
+| Scranton | Lackawana Country   |
+| Stamford | FedEx               |
+| Stamford | John Daly Law, LLC  |
+| Scranton | Scranton Whitepages |
+| Stamford | Times Newspaper     |
+| Scranton | FedEx               |
++----------+---------------------+
+7 rows in set (0.000 sec)
+
+MariaDB [company]> select Fname,Lname from employee where not exist (Select * from dependent where ssn=Essn);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Select * from dependent where ssn=Essn)' at line 1
+MariaDB [company]> select * from client]
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ']' at line 1
+MariaDB [company]> select * from client;
++-----------+---------------------+-----------+
+| client_id | client_name         | branch_id |
++-----------+---------------------+-----------+
+|       400 | Dunmore Highschool  |         2 |
+|       401 | Lackawana Country   |         2 |
+|       402 | FedEx               |         3 |
+|       403 | John Daly Law, LLC  |         3 |
+|       404 | Scranton Whitepages |         2 |
+|       405 | Times Newspaper     |         3 |
+|       406 | FedEx               |         2 |
++-----------+---------------------+-----------+
+7 rows in set (0.001 sec)
+
+MariaDB [company]> select * from employee;
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.001 sec)
+
+MariaDB [company]> select * from employee where exist (select * from branch where branch_id=1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from branch where branch_id=1)' at line 1
+MariaDB [company]> select * from branch
+    -> ;
++-----------+-------------+--------+----------------+
+| branch_id | branch_name | mgr_id | mgr_start_date |
++-----------+-------------+--------+----------------+
+|         1 | Corporate   |    100 | 2006-02-09     |
+|         2 | Scranton    |    102 | 1992-04-06     |
+|         3 | Stamford    |    106 | 1998-02-13     |
+|         4 | Buffalo     |   NULL | NULL           |
++-----------+-------------+--------+----------------+
+4 rows in set (0.000 sec)
+
+MariaDB [company]> select * from employee where exist (select * from branch where branch_id=1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from branch where branch_id=1)' at line 1
+MariaDB [company]> select * from works_with;
++--------+-----------+-------------+
+| emp_id | client_id | total_sales |
++--------+-----------+-------------+
+|    102 |       401 |      267000 |
+|    102 |       406 |       15000 |
+|    105 |       400 |       55000 |
+|    105 |       404 |       33000 |
+|    105 |       406 |      130000 |
+|    107 |       403 |        5000 |
+|    107 |       405 |       26000 |
+|    108 |       402 |       22500 |
+|    108 |       403 |       12000 |
++--------+-----------+-------------+
+9 rows in set (0.019 sec)
+
+MariaDB [company]> select * from employee where exists (select * from branch where branch_id=1);
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.004 sec)
+
+MariaDB [company]> select * from employee where exists (select * from works_with where client_id=401);
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.007 sec)
+
+MariaDB [company]> select * from employee where exists (select * from works_with where emp_id=employee.emp_id);
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+4 rows in set (0.007 sec)
+
+MariaDB [company]> select * from employee where not exists (select * from works_with where emp_id=employee.emp_id);
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+5 rows in set (0.004 sec)
+
+MariaDB [company]> select E.lname as employee ,S.Lname as SUP from employee as E ,employee as S where E.super_id = S.emp_id;
+ERROR 1054 (42S22): Unknown column 'E.lname' in 'field list'
+MariaDB [company]> select E.first_name as employee ,S.Last_name as SUP from employee as E ,employee as S where E.super_id = S.emp_id;
++----------+---------+
+| employee | SUP     |
++----------+---------+
+| Jan      | Wallace |
+| Michael  | Wallace |
+| Angela   | Scott   |
+| Kelly    | Scott   |
+| Stanley  | Scott   |
+| Josh     | Wallace |
+| Andy     | Porter  |
+| Jim      | Porter  |
++----------+---------+
+8 rows in set (0.001 sec)
+
+MariaDB [company]> select E.last_name as employee ,S.Last_name as SUP from employee as E ,employee as S where E.super_id = S.emp_id;
++----------+---------+
+| employee | SUP     |
++----------+---------+
+| Levinson | Wallace |
+| Scott    | Wallace |
+| Martin   | Scott   |
+| Kapoor   | Scott   |
+| Hudson   | Scott   |
+| Porter   | Wallace |
+| Bernard  | Porter  |
+| Halpert  | Porter  |
++----------+---------+
+8 rows in set (0.000 sec)
+
+MariaDB [company]> select E.last_name as employee ,S.Last_name as SUP from employee as E ,employee as S where E.emp_id = S.super_id;
++----------+----------+
+| employee | SUP      |
++----------+----------+
+| Wallace  | Levinson |
+| Wallace  | Scott    |
+| Scott    | Martin   |
+| Scott    | Kapoor   |
+| Scott    | Hudson   |
+| Wallace  | Porter   |
+| Porter   | Bernard  |
+| Porter   | Halpert  |
++----------+----------+
+8 rows in set (0.001 sec)
+
+MariaDB [company]> select E.last_name as employee ,S.first_name as SUP from employee as E ,employee as S where E.emp_id = S.super_id;
++----------+---------+
+| employee | SUP     |
++----------+---------+
+| Wallace  | Jan     |
+| Wallace  | Michael |
+| Scott    | Angela  |
+| Scott    | Kelly   |
+| Scott    | Stanley |
+| Wallace  | Josh    |
+| Porter   | Andy    |
+| Porter   | Jim     |
++----------+---------+
+8 rows in set (0.001 sec)
+
+MariaDB [company]> above thing is wrongg;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'above thing is wrongg' at line 1
+MariaDB [company]> select E.last_name as employee ,S.Last_name as SUP from employee as E ,employee as S where E.super_id = S.emp_id;+----------+---------+
+| employee | SUP     |
++----------+---------+
+| Levinson | Wallace |
+| Scott    | Wallace |
+| Martin   | Scott   |
+| Kapoor   | Scott   |
+| Hudson   | Scott   |
+| Porter   | Wallace |
+| Bernard  | Porter  |
+| Halpert  | Porter  |
++----------+---------+
+8 rows in set (0.001 sec)
+
+MariaDB [company]>

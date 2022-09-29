@@ -1,0 +1,1752 @@
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 152
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use railwayticket_415;
+Database changed
+MariaDB [railwayticket_415]> show tables;
++-----------------------------+
+| Tables_in_railwayticket_415 |
++-----------------------------+
+| compartment_415             |
+| faretable_415               |
+| passenger_415               |
+| payment_415                 |
+| phone_415                   |
+| route_415                   |
+| ticket_415                  |
+| train_415                   |
+| user_415                    |
+| user_train_415              |
++-----------------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from user;
+ERROR 1146 (42S02): Table 'railwayticket_415.user' doesn't exist
+MariaDB [railwayticket_415]> select * from user_415;
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| User_ID | User_Type | FName      | LName     | Age  | DOB        | Pincode | Street_Number   |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| ADM_001 | ADMIN     | Narendra   | Modi      | NULL | 1989-04-14 |  600047 | Old Jail Road   |
+| ADM_002 | ADMIN     | Droupadi   | Murmu     | NULL | 1990-04-14 |  640012 | High Street   |
+| ADM_003 | ADMIN     | Manmohan   | Singh     | NULL | 1991-04-08 |  575003 | Pumpwell Road   |
+| USR_001 | PSGR      |   Ajit     | Ullal     | NULL | 1971-01-01 |  560001 | 10 Janpath   |
+| USR_002 | PSGR      | Muhammed   | Ali       | NULL | 2000-10-09 |  560003 | 10 Downing   |
+| USR_003 | PSGR      | Sai Deepak | Reddy     | NULL | 1996-12-12 |  600001 | 14 Kailsh Marg   |
+| USR_004 | PSGR      | Rudra      | Agarwal   | NULL | 1996-12-13 |  600042 | 5 Lohia Garden   |
+| USR_005 | PSGR      | Rahul      | Khanna    | NULL | 1997-12-14 |  600067 | 1 Pink Street   |
+| USR_006 | PSGR      | Nirmala    | Seturaman | NULL | 1998-12-15 |  560105 | 3 Blue Avenue   |
+| USR_007 | PSGR      | Smriti     | Irani     | NULL | 1999-12-16 |  575014 | 4 Banyan Avenie   |
+| USR_008 | PSGR      | Ajit       | Sethi     | NULL | 1966-04-14 |  575001 | 6 Poes Garden   |
+| USR_009 | PSGR      | Arjun      | Allu      | NULL | 1967-04-08 |  575020 | 7 Dhamaka street   |
+| USR_010 | PSGR      | Samanta    | Prabhu    | NULL | 1968-04-14 |  600042 | 8 Clone Colony   |
+| USR_011 | PSGR      | Kiran      | Bedi      | NULL | 1969-04-14 |  560003 | 56 Brigade Road   |
+| USR_012 | PSGR      | Rahul      | Gandhi    | NULL | 1970-04-08 |  475001 | Mirza road   |
+| USR_013 | PSGR      | Rashkit    | Shetty    | NULL | 1971-04-14 |  560009 | JC Road   |
+| USR_014 | PSGR      | Rishi      | Sunak     | NULL | 1972-04-14 |  600034 | Anna Sali   |
+| USR_015 | PSGR      | Vedavalli  | Srinath   | NULL | 1973-04-14 |  560054 | Church Street Bangalore   |
+| USR_016 | PSGR      | Subbu      | Saravana  | NULL | 1974-04-14 |  600043 | American Street   |
+| USR_017 | PSGR      | Sheela     | Dixit     | NULL | 1975-04-08 |  560048 | Kasturba Road   |
+| USR_018 | PSGR      | Margaret   | Alva      | NULL | 1976-04-14 |  560008 | New BEL Road   |
+| USR_019 | PSGR      | Arun       | Kumar     | NULL | 1977-04-14 |  600046 | Mint Street   |
+| USR_020 | PSGR      | Anshu      | Bhardwaj  | NULL | 1978-04-14 |  575001 | KSR Road   |
+| USR_021 | PSGR      | Suma       | Sampat    | NULL | 1979-04-08 |  560012 | Old Airport Road Bangalore |
+| USR_022 | PSGR      | Srihari    | Udupa     | NULL | 1980-04-14 |  560015 | Suranjan Das Road   |
+| USR_023 | PSGR      | Satish     | Kotian    | NULL | 1981-04-14 |  600044 | T Nagar   |
+| USR_024 | PSGR      | Shradha    | Nayar     | NULL | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha    | Solanki   | NULL | 1983-04-08 |  575030 | M G Road   |
+| USR_026 | PSGR      | Bharti     | Devgan    | NULL | 1984-04-14 |  560059 | NAL Wind Tunnel Road   |
+| USR_027 | PSGR      | Roopa      | Ram       | NULL | 1985-04-14 |  575023 | Bunder Road   |
+| USR_028 | PSGR      | Pallavi    | Ram       | NULL | 1986-04-08 |  560044 | Lavelle Road   |
+| USR_029 | PSGR      | Ravi       | Naik      | NULL | 1987-04-14 |  600045 | Thiru V ka Salai   |
+| USR_030 | PSGR      | Virat      | Murthy    | NULL | 1988-04-14 |  575011 | Bejai New Road   |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+33 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> update user
+    -> _415
+    -> set AGE = DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(),DOB)),'%Y');
+ERROR 1146 (42S02): Table 'railwayticket_415.user' doesn't exist
+MariaDB [railwayticket_415]> update user_415
+    -> set AGE = DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(),DOB)),'%Y');
+Query OK, 33 rows affected (0.003 sec)
+Rows matched: 33  Changed: 33  Warnings: 0
+
+MariaDB [railwayticket_415]> select * from user_415;
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| User_ID | User_Type | FName      | LName     | Age  | DOB        | Pincode | Street_Number   |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| ADM_001 | ADMIN     | Narendra   | Modi      | 0033 | 1989-04-14 |  600047 | Old Jail Road   |
+| ADM_002 | ADMIN     | Droupadi   | Murmu     | 0032 | 1990-04-14 |  640012 | High Street   |
+| ADM_003 | ADMIN     | Manmohan   | Singh     | 0031 | 1991-04-08 |  575003 | Pumpwell Road   |
+| USR_001 | PSGR      |   Ajit     | Ullal     | 0051 | 1971-01-01 |  560001 | 10 Janpath   |
+| USR_002 | PSGR      | Muhammed   | Ali       | 0021 | 2000-10-09 |  560003 | 10 Downing   |
+| USR_003 | PSGR      | Sai Deepak | Reddy     | 0025 | 1996-12-12 |  600001 | 14 Kailsh Marg   |
+| USR_004 | PSGR      | Rudra      | Agarwal   | 0025 | 1996-12-13 |  600042 | 5 Lohia Garden   |
+| USR_005 | PSGR      | Rahul      | Khanna    | 0024 | 1997-12-14 |  600067 | 1 Pink Street   |
+| USR_006 | PSGR      | Nirmala    | Seturaman | 0023 | 1998-12-15 |  560105 | 3 Blue Avenue   |
+| USR_007 | PSGR      | Smriti     | Irani     | 0022 | 1999-12-16 |  575014 | 4 Banyan Avenie   |
+| USR_008 | PSGR      | Ajit       | Sethi     | 0056 | 1966-04-14 |  575001 | 6 Poes Garden   |
+| USR_009 | PSGR      | Arjun      | Allu      | 0055 | 1967-04-08 |  575020 | 7 Dhamaka street   |
+| USR_010 | PSGR      | Samanta    | Prabhu    | 0054 | 1968-04-14 |  600042 | 8 Clone Colony   |
+| USR_011 | PSGR      | Kiran      | Bedi      | 0053 | 1969-04-14 |  560003 | 56 Brigade Road   |
+| USR_012 | PSGR      | Rahul      | Gandhi    | 0052 | 1970-04-08 |  475001 | Mirza road   |
+| USR_013 | PSGR      | Rashkit    | Shetty    | 0051 | 1971-04-14 |  560009 | JC Road   |
+| USR_014 | PSGR      | Rishi      | Sunak     | 0050 | 1972-04-14 |  600034 | Anna Sali   |
+| USR_015 | PSGR      | Vedavalli  | Srinath   | 0049 | 1973-04-14 |  560054 | Church Street Bangalore   |
+| USR_016 | PSGR      | Subbu      | Saravana  | 0048 | 1974-04-14 |  600043 | American Street   |
+| USR_017 | PSGR      | Sheela     | Dixit     | 0047 | 1975-04-08 |  560048 | Kasturba Road   |
+| USR_018 | PSGR      | Margaret   | Alva      | 0046 | 1976-04-14 |  560008 | New BEL Road   |
+| USR_019 | PSGR      | Arun       | Kumar     | 0045 | 1977-04-14 |  600046 | Mint Street   |
+| USR_020 | PSGR      | Anshu      | Bhardwaj  | 0044 | 1978-04-14 |  575001 | KSR Road   |
+| USR_021 | PSGR      | Suma       | Sampat    | 0043 | 1979-04-08 |  560012 | Old Airport Road Bangalore |
+| USR_022 | PSGR      | Srihari    | Udupa     | 0042 | 1980-04-14 |  560015 | Suranjan Das Road   |
+| USR_023 | PSGR      | Satish     | Kotian    | 0041 | 1981-04-14 |  600044 | T Nagar   |
+| USR_024 | PSGR      | Shradha    | Nayar     | 0040 | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha    | Solanki   | 0039 | 1983-04-08 |  575030 | M G Road   |
+| USR_026 | PSGR      | Bharti     | Devgan    | 0038 | 1984-04-14 |  560059 | NAL Wind Tunnel Road   |
+| USR_027 | PSGR      | Roopa      | Ram       | 0037 | 1985-04-14 |  575023 | Bunder Road   |
+| USR_028 | PSGR      | Pallavi    | Ram       | 0036 | 1986-04-08 |  560044 | Lavelle Road   |
+| USR_029 | PSGR      | Ravi       | Naik      | 0035 | 1987-04-14 |  600045 | Thiru V ka Salai   |
+| USR_030 | PSGR      | Virat      | Murthy    | 0034 | 1988-04-14 |  575011 | Bejai New Road   |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+33 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> update user_415 set AGE = DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(),DOB)),'%Y')+0;
+Query OK, 33 rows affected (0.005 sec)
+Rows matched: 33  Changed: 33  Warnings: 0
+
+MariaDB [railwayticket_415]> select * from user_415;
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| User_ID | User_Type | FName      | LName     | Age  | DOB        | Pincode | Street_Number   |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| ADM_001 | ADMIN     | Narendra   | Modi      | 33   | 1989-04-14 |  600047 | Old Jail Road   |
+| ADM_002 | ADMIN     | Droupadi   | Murmu     | 32   | 1990-04-14 |  640012 | High Street   |
+| ADM_003 | ADMIN     | Manmohan   | Singh     | 31   | 1991-04-08 |  575003 | Pumpwell Road   |
+| USR_001 | PSGR      |   Ajit     | Ullal     | 51   | 1971-01-01 |  560001 | 10 Janpath   |
+| USR_002 | PSGR      | Muhammed   | Ali       | 21   | 2000-10-09 |  560003 | 10 Downing   |
+| USR_003 | PSGR      | Sai Deepak | Reddy     | 25   | 1996-12-12 |  600001 | 14 Kailsh Marg   |
+| USR_004 | PSGR      | Rudra      | Agarwal   | 25   | 1996-12-13 |  600042 | 5 Lohia Garden   |
+| USR_005 | PSGR      | Rahul      | Khanna    | 24   | 1997-12-14 |  600067 | 1 Pink Street   |
+| USR_006 | PSGR      | Nirmala    | Seturaman | 23   | 1998-12-15 |  560105 | 3 Blue Avenue   |
+| USR_007 | PSGR      | Smriti     | Irani     | 22   | 1999-12-16 |  575014 | 4 Banyan Avenie   |
+| USR_008 | PSGR      | Ajit       | Sethi     | 56   | 1966-04-14 |  575001 | 6 Poes Garden   |
+| USR_009 | PSGR      | Arjun      | Allu      | 55   | 1967-04-08 |  575020 | 7 Dhamaka street   |
+| USR_010 | PSGR      | Samanta    | Prabhu    | 54   | 1968-04-14 |  600042 | 8 Clone Colony   |
+| USR_011 | PSGR      | Kiran      | Bedi      | 53   | 1969-04-14 |  560003 | 56 Brigade Road   |
+| USR_012 | PSGR      | Rahul      | Gandhi    | 52   | 1970-04-08 |  475001 | Mirza road   |
+| USR_013 | PSGR      | Rashkit    | Shetty    | 51   | 1971-04-14 |  560009 | JC Road   |
+| USR_014 | PSGR      | Rishi      | Sunak     | 50   | 1972-04-14 |  600034 | Anna Sali   |
+| USR_015 | PSGR      | Vedavalli  | Srinath   | 49   | 1973-04-14 |  560054 | Church Street Bangalore   |
+| USR_016 | PSGR      | Subbu      | Saravana  | 48   | 1974-04-14 |  600043 | American Street   |
+| USR_017 | PSGR      | Sheela     | Dixit     | 47   | 1975-04-08 |  560048 | Kasturba Road   |
+| USR_018 | PSGR      | Margaret   | Alva      | 46   | 1976-04-14 |  560008 | New BEL Road   |
+| USR_019 | PSGR      | Arun       | Kumar     | 45   | 1977-04-14 |  600046 | Mint Street   |
+| USR_020 | PSGR      | Anshu      | Bhardwaj  | 44   | 1978-04-14 |  575001 | KSR Road   |
+| USR_021 | PSGR      | Suma       | Sampat    | 43   | 1979-04-08 |  560012 | Old Airport Road Bangalore |
+| USR_022 | PSGR      | Srihari    | Udupa     | 42   | 1980-04-14 |  560015 | Suranjan Das Road   |
+| USR_023 | PSGR      | Satish     | Kotian    | 41   | 1981-04-14 |  600044 | T Nagar   |
+| USR_024 | PSGR      | Shradha    | Nayar     | 40   | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha    | Solanki   | 39   | 1983-04-08 |  575030 | M G Road   |
+| USR_026 | PSGR      | Bharti     | Devgan    | 38   | 1984-04-14 |  560059 | NAL Wind Tunnel Road   |
+| USR_027 | PSGR      | Roopa      | Ram       | 37   | 1985-04-14 |  575023 | Bunder Road   |
+| USR_028 | PSGR      | Pallavi    | Ram       | 36   | 1986-04-08 |  560044 | Lavelle Road   |
+| USR_029 | PSGR      | Ravi       | Naik      | 35   | 1987-04-14 |  600045 | Thiru V ka Salai   |
+| USR_030 | PSGR      | Virat      | Murthy    | 34   | 1988-04-14 |  575011 | Bejai New Road   |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+33 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from passenger_415;
++---------+------------------+-----+--------+
+| Seat_No | Name             | Age | PNR    |
++---------+------------------+-----+--------+
+| F01-3   | Saideepak Reddy  |  27 | PNR001 |
+| F01-4   | Sheela Reddy     |  25 | PNR001 |
+| F02-11  | SaiDeepak Reddy  |  27 | PNR002 |
+| F02-12  | Sheela Reddy     |  25 | PNR002 |
+| G01-50  | Anwar Hussein    |  32 | PNR003 |
+| G01-51  | Karishma Husein  |  12 | PNR003 |
+| G02-31  | Anwar Hussein    |  32 | PNR004 |
+| G02-32  | Karishma Husein  |  12 | PNR004 |
+| S01-9   | Ajit Ullal       |  31 | PNR005 |
+| S01-10  | Hema Ullal       |  27 | PNR005 |
+| S01-11  | Hima Ullal       |  28 | PNR005 |
+| S01-12  | Asha Ullal       |  21 | PNR005 |
+| S01-35  | Smriti Irani     |  40 | PNR006 |
+| S01-14  | Christon D Souza |  27 | PNR007 |
+| F01-8   | Christon D Souza |  27 | PNR008 |
+| G02-45  | Samanta Prabhu   |  21 | PNR009 |
+| G02-50  | Rakshita Prabhu  |  21 | PNR009 |
+| S01-25  | Samanta Prabhu   |  21 | PNR010 |
+| S01-26  | Rakshita Prabhu  |  21 | PNR010 |
+| F01-7   | Sheela Seth      |  33 | PNR011 |
+| F01-13  | Ramya R          |  45 | PNR012 |
+| S01-1   | Shradha Nayar    |  20 | PNR013 |
+| S01-2   | Shradha Nayar    |  20 | PNR014 |
+| S01-29  | Khushi Jha       |  18 | PNR015 |
++---------+------------------+-----+--------+
+24 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from route_415;
++-------------+-----------+-------------------+-----------------+----------+----------+
+| From_STN_No | To_STN_No | From_STN          | To_STN          | Distance | Train_No |
++-------------+-----------+-------------------+-----------------+----------+----------+
+|           0 |         0 | From_Station_Name | To_Station_Name |        0 |        0 |
+|           1 |         2 | Bengaluru         | Bangarpet       |       71 |    62621 |
+|           2 |         3 | Bangarpet         | Katpadi         |      161 |    62621 |
+|           3 |         4 | Katpadi           | Sholigur        |       40 |    62621 |
+|           4 |         5 | Sholingur         | Chennai         |       90 |    62621 |
+|           1 |         3 | Bengaluru         | Katpadi         |      232 |    62621 |
+|           1 |         4 | Bengaluru         | Sholigur        |      272 |    62621 |
+|           1 |         5 | Bengaluru         | Chennai         |      362 |    62621 |
+|           2 |         4 | Bangarpet         | Sholigur        |      201 |    62621 |
+|           2 |         5 | Bangarpet         | Chennai         |      291 |    62621 |
+|           3 |         5 | Katpadi           | Chennai         |      130 |    62621 |
+|           1 |         2 | Chennai           | Sholingur       |       90 |    62620 |
+|           2 |         3 | Sholingur         | Katpadi         |       39 |    62620 |
+|           3 |         4 | Katpadi           | Bangarpet       |      161 |    62620 |
+|           4 |         5 | Bangarpet         | Bengaluru       |       71 |    62620 |
+|           1 |         3 | Chennai           | Katpadi         |      129 |    62620 |
+|           1 |         4 | Chennai           | Bangarpet       |      290 |    62620 |
+|           1 |         5 | Chennai           | Bengaluru       |      361 |    62620 |
+|           2 |         4 | Sholingur         | Bangarpet       |      200 |    62620 |
+|           2 |         5 | Sholingur         | Chennai         |      271 |    62620 |
+|           3 |         5 | Katpadi           | Chennai         |      232 |    62620 |
+|           1 |         2 | Chennai           | Palakkad        |      130 |    25261 |
+|           2 |         3 | Palakkad          | Kannur          |      220 |    25261 |
+|           3 |         4 | Kannur            | Mangaluru       |      131 |    25261 |
+|           1 |         3 | Chennai           | Kannur          |      350 |    25261 |
+|           1 |         4 | Chennai           | Mangaluru       |      481 |    25261 |
+|           2 |         4 | Palakkad          | Mangaluru       |      351 |    25261 |
+|           1 |         2 | Mangaluru         | Kannur          |      131 |    25260 |
+|           2 |         3 | Kannur            | Palakkad        |      220 |    25260 |
+|           4 |         4 | Palakkad          | Chennai         |      130 |    25260 |
+|           1 |         3 | Mangaluru         | Palakkad        |      351 |    25260 |
+|           1 |         4 | Mangaluru         | Chennai         |      481 |    25260 |
+|           2 |         4 | Kannur            | Chennai         |      350 |    25260 |
+|           1 |         2 | Bengaluru         | Mysore          |      139 |    58451 |
+|           2 |         3 | Mysore            | Subramanya      |      170 |    58451 |
+|           3 |         4 | Subramanya        | Mangaluru       |      194 |    58451 |
+|           1 |         3 | Bengaluru         | Subramanya      |      309 |    58451 |
+|           1 |         4 | Bengaluru         | Mangaluru       |      503 |    58451 |
+|           2 |         4 | Mysore            | Mangaluru       |      364 |    58451 |
+|           1 |         2 | Mangaluru         | Subramanya      |      195 |    58450 |
+|           2 |         3 | Subramanya        | Mysore          |      170 |    58450 |
+|           3 |         4 | Mysore            | Bengaluru       |      139 |    58450 |
+|           1 |         3 | Mangaluru         | Mysore          |      365 |    58450 |
+|           1 |         4 | Mangaluru         | Bengaluru       |      504 |    58450 |
+|           2 |         4 | Subramanya        | Bengaluru       |      309 |    58450 |
++-------------+-----------+-------------------+-----------------+----------+----------+
+45 rows in set (0.007 sec)
+
+MariaDB [railwayticket_415]> SELECT * from route_415 where Distance >=70 and Distance <=150;
++-------------+-----------+-----------+-----------+----------+----------+
+| From_STN_No | To_STN_No | From_STN  | To_STN    | Distance | Train_No |
++-------------+-----------+-----------+-----------+----------+----------+
+|           1 |         2 | Bengaluru | Bangarpet |       71 |    62621 |
+|           4 |         5 | Sholingur | Chennai   |       90 |    62621 |
+|           3 |         5 | Katpadi   | Chennai   |      130 |    62621 |
+|           1 |         2 | Chennai   | Sholingur |       90 |    62620 |
+|           4 |         5 | Bangarpet | Bengaluru |       71 |    62620 |
+|           1 |         3 | Chennai   | Katpadi   |      129 |    62620 |
+|           1 |         2 | Chennai   | Palakkad  |      130 |    25261 |
+|           3 |         4 | Kannur    | Mangaluru |      131 |    25261 |
+|           1 |         2 | Mangaluru | Kannur    |      131 |    25260 |
+|           4 |         4 | Palakkad  | Chennai   |      130 |    25260 |
+|           1 |         2 | Bengaluru | Mysore    |      139 |    58451 |
+|           3 |         4 | Mysore    | Bengaluru |      139 |    58450 |
++-------------+-----------+-----------+-----------+----------+----------+
+12 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * train_415;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'train_415' at line 1
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|        0 | Name             | Train_Type | Source    | Destination | Availability |
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+7 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> SELECT * from route_415;
++-------------+-----------+-------------------+-----------------+----------+----------+
+| From_STN_No | To_STN_No | From_STN          | To_STN          | Distance | Train_No |
++-------------+-----------+-------------------+-----------------+----------+----------+
+|           0 |         0 | From_Station_Name | To_Station_Name |        0 |        0 |
+|           1 |         2 | Bengaluru         | Bangarpet       |       71 |    62621 |
+|           2 |         3 | Bangarpet         | Katpadi         |      161 |    62621 |
+|           3 |         4 | Katpadi           | Sholigur        |       40 |    62621 |
+|           4 |         5 | Sholingur         | Chennai         |       90 |    62621 |
+|           1 |         3 | Bengaluru         | Katpadi         |      232 |    62621 |
+|           1 |         4 | Bengaluru         | Sholigur        |      272 |    62621 |
+|           1 |         5 | Bengaluru         | Chennai         |      362 |    62621 |
+|           2 |         4 | Bangarpet         | Sholigur        |      201 |    62621 |
+|           2 |         5 | Bangarpet         | Chennai         |      291 |    62621 |
+|           3 |         5 | Katpadi           | Chennai         |      130 |    62621 |
+|           1 |         2 | Chennai           | Sholingur       |       90 |    62620 |
+|           2 |         3 | Sholingur         | Katpadi         |       39 |    62620 |
+|           3 |         4 | Katpadi           | Bangarpet       |      161 |    62620 |
+|           4 |         5 | Bangarpet         | Bengaluru       |       71 |    62620 |
+|           1 |         3 | Chennai           | Katpadi         |      129 |    62620 |
+|           1 |         4 | Chennai           | Bangarpet       |      290 |    62620 |
+|           1 |         5 | Chennai           | Bengaluru       |      361 |    62620 |
+|           2 |         4 | Sholingur         | Bangarpet       |      200 |    62620 |
+|           2 |         5 | Sholingur         | Chennai         |      271 |    62620 |
+|           3 |         5 | Katpadi           | Chennai         |      232 |    62620 |
+|           1 |         2 | Chennai           | Palakkad        |      130 |    25261 |
+|           2 |         3 | Palakkad          | Kannur          |      220 |    25261 |
+|           3 |         4 | Kannur            | Mangaluru       |      131 |    25261 |
+|           1 |         3 | Chennai           | Kannur          |      350 |    25261 |
+|           1 |         4 | Chennai           | Mangaluru       |      481 |    25261 |
+|           2 |         4 | Palakkad          | Mangaluru       |      351 |    25261 |
+|           1 |         2 | Mangaluru         | Kannur          |      131 |    25260 |
+|           2 |         3 | Kannur            | Palakkad        |      220 |    25260 |
+|           4 |         4 | Palakkad          | Chennai         |      130 |    25260 |
+|           1 |         3 | Mangaluru         | Palakkad        |      351 |    25260 |
+|           1 |         4 | Mangaluru         | Chennai         |      481 |    25260 |
+|           2 |         4 | Kannur            | Chennai         |      350 |    25260 |
+|           1 |         2 | Bengaluru         | Mysore          |      139 |    58451 |
+|           2 |         3 | Mysore            | Subramanya      |      170 |    58451 |
+|           3 |         4 | Subramanya        | Mangaluru       |      194 |    58451 |
+|           1 |         3 | Bengaluru         | Subramanya      |      309 |    58451 |
+|           1 |         4 | Bengaluru         | Mangaluru       |      503 |    58451 |
+|           2 |         4 | Mysore            | Mangaluru       |      364 |    58451 |
+|           1 |         2 | Mangaluru         | Subramanya      |      195 |    58450 |
+|           2 |         3 | Subramanya        | Mysore          |      170 |    58450 |
+|           3 |         4 | Mysore            | Bengaluru       |      139 |    58450 |
+|           1 |         3 | Mangaluru         | Mysore          |      365 |    58450 |
+|           1 |         4 | Mangaluru         | Bengaluru       |      504 |    58450 |
+|           2 |         4 | Subramanya        | Bengaluru       |      309 |    58450 |
++-------------+-----------+-------------------+-----------------+----------+----------+
+45 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> delete from route_415 where Distance=0;
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [railwayticket_415]> SELECT * from route_415;
++-------------+-----------+------------+------------+----------+----------+
+| From_STN_No | To_STN_No | From_STN   | To_STN     | Distance | Train_No |
++-------------+-----------+------------+------------+----------+----------+
+|           1 |         2 | Bengaluru  | Bangarpet  |       71 |    62621 |
+|           2 |         3 | Bangarpet  | Katpadi    |      161 |    62621 |
+|           3 |         4 | Katpadi    | Sholigur   |       40 |    62621 |
+|           4 |         5 | Sholingur  | Chennai    |       90 |    62621 |
+|           1 |         3 | Bengaluru  | Katpadi    |      232 |    62621 |
+|           1 |         4 | Bengaluru  | Sholigur   |      272 |    62621 |
+|           1 |         5 | Bengaluru  | Chennai    |      362 |    62621 |
+|           2 |         4 | Bangarpet  | Sholigur   |      201 |    62621 |
+|           2 |         5 | Bangarpet  | Chennai    |      291 |    62621 |
+|           3 |         5 | Katpadi    | Chennai    |      130 |    62621 |
+|           1 |         2 | Chennai    | Sholingur  |       90 |    62620 |
+|           2 |         3 | Sholingur  | Katpadi    |       39 |    62620 |
+|           3 |         4 | Katpadi    | Bangarpet  |      161 |    62620 |
+|           4 |         5 | Bangarpet  | Bengaluru  |       71 |    62620 |
+|           1 |         3 | Chennai    | Katpadi    |      129 |    62620 |
+|           1 |         4 | Chennai    | Bangarpet  |      290 |    62620 |
+|           1 |         5 | Chennai    | Bengaluru  |      361 |    62620 |
+|           2 |         4 | Sholingur  | Bangarpet  |      200 |    62620 |
+|           2 |         5 | Sholingur  | Chennai    |      271 |    62620 |
+|           3 |         5 | Katpadi    | Chennai    |      232 |    62620 |
+|           1 |         2 | Chennai    | Palakkad   |      130 |    25261 |
+|           2 |         3 | Palakkad   | Kannur     |      220 |    25261 |
+|           3 |         4 | Kannur     | Mangaluru  |      131 |    25261 |
+|           1 |         3 | Chennai    | Kannur     |      350 |    25261 |
+|           1 |         4 | Chennai    | Mangaluru  |      481 |    25261 |
+|           2 |         4 | Palakkad   | Mangaluru  |      351 |    25261 |
+|           1 |         2 | Mangaluru  | Kannur     |      131 |    25260 |
+|           2 |         3 | Kannur     | Palakkad   |      220 |    25260 |
+|           4 |         4 | Palakkad   | Chennai    |      130 |    25260 |
+|           1 |         3 | Mangaluru  | Palakkad   |      351 |    25260 |
+|           1 |         4 | Mangaluru  | Chennai    |      481 |    25260 |
+|           2 |         4 | Kannur     | Chennai    |      350 |    25260 |
+|           1 |         2 | Bengaluru  | Mysore     |      139 |    58451 |
+|           2 |         3 | Mysore     | Subramanya |      170 |    58451 |
+|           3 |         4 | Subramanya | Mangaluru  |      194 |    58451 |
+|           1 |         3 | Bengaluru  | Subramanya |      309 |    58451 |
+|           1 |         4 | Bengaluru  | Mangaluru  |      503 |    58451 |
+|           2 |         4 | Mysore     | Mangaluru  |      364 |    58451 |
+|           1 |         2 | Mangaluru  | Subramanya |      195 |    58450 |
+|           2 |         3 | Subramanya | Mysore     |      170 |    58450 |
+|           3 |         4 | Mysore     | Bengaluru  |      139 |    58450 |
+|           1 |         3 | Mangaluru  | Mysore     |      365 |    58450 |
+|           1 |         4 | Mangaluru  | Bengaluru  |      504 |    58450 |
+|           2 |         4 | Subramanya | Bengaluru  |      309 |    58450 |
++-------------+-----------+------------+------------+----------+----------+
+44 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from route_415 where (To_STN="Chennai" and From_STN="Sholingur")or (To_STN="Sholingur" and From_STN="Chennai");
++-------------+-----------+-----------+-----------+----------+----------+
+| From_STN_No | To_STN_No | From_STN  | To_STN    | Distance | Train_No |
++-------------+-----------+-----------+-----------+----------+----------+
+|           4 |         5 | Sholingur | Chennai   |       90 |    62621 |
+|           1 |         2 | Chennai   | Sholingur |       90 |    62620 |
+|           2 |         5 | Sholingur | Chennai   |      271 |    62620 |
++-------------+-----------+-----------+-----------+----------+----------+
+3 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from ticket_415;
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR    | Train_No | Travel_Date | Departure  | Arrival   | Departure_Time | Arrival_Time | User_ID |Train_Type | Compartment_Type | Compartment_No |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR001 |    62621 | 0000-00-00  | Bengaluru  | Chennai   | 16:00:00       | 20:30:00     | ADM_001 |Superfast  | I Class
+| F01            |
+| PNR002 |    62620 | 0000-00-00  | Chennai    | Bengaluru | 08:00:00       | 12:25:00     | ADM_001 |Superfast  | I Class
+| F02            |
+| PNR003 |    25261 | 0000-00-00  | Chennai    | Mangaluru | 18:00:00       | 07:30:00     | ADM_003 |Mail       | III Class        | G02            |
+| PNR004 |    25260 | 0000-00-00  | Mangaluru  | Chennai   | 19:15:00       | 08:00:00     | ADM_003 |Mail       | II Class
+| S02            |
+| PNR005 |    58451 | 0000-00-00  | Bengaluru  | Mangaluru | 06:00:00       | 14:00:00     | USR_002 |Fast       | III Class        | G01            |
+| PNR006 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class
+| S01            |
+| PNR007 |    62621 | 0000-00-00  | Bangarpet  | Chennai   | 18:00:00       | 20:30:00     | ADM_002 |Superfast  | II Class
+| S01            |
+| PNR008 |    62620 | 0000-00-00  | Chennai    | Bangarpet | 08:00:00       | 09:00:00     | ADM_002 |Superfast  | I Class
+| F01            |
+| PNR009 |    25261 | 2022-09-07  | Mangalore  | Banglaore | 16:22:39       | 22:22:39     | USR_007 |Mail       | II Class
+| G01            |
+| PNR010 |    25260 | 0000-00-00  | Mangaluru  | Kannur    | 19:15:00       | 23:15:00     | USR_007 |Mail       | II Class
+| S01            |
+| PNR011 |    62621 | 0000-00-00  | Katapadi   | Chennai   | 19:00:00       | 20:30:00     | USR_008 |Superfast  | I Class
+| F01            |
+| PNR012 |    58451 | 0000-00-00  | Subramanya | Mangaluru | 11:00:00       | 14:00:00     | USR_009 |Fast       | I Class
+| F01            |
+| PNR013 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class
+| S01            |
+| PNR014 |    25260 | 0000-00-00  | Kannur     | Palakkad  | 23:15:00       | 04:30:00     | USR_010 |Mail       | II Class
+| S01            |
+| PNR015 |    25260 | 0000-00-00  | Palakkad   | Chennai   | 04:30:00       | 08:00:00     | USR_012 |Mail       | II Class
+| S01            |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+15 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from train_415 join ticket_415 on train_415.Train_No = ticket_415.Train_No where ticket_415.train_type != "mail";
++----------+------------------+------------+-----------+-------------+--------------+--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability | PNR    | Train_No | Travel_Date | Departure  | Arrival   | Departure_Time | Arrival_Time | User_ID | Train_Type | Compartment_Type | Compartment_No |
++----------+------------------+------------+-----------+-------------+--------------+--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          | PNR006 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 | Fast       | II Class         | S01            |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          | PNR013 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 | Fast       | II Class         | S01            |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          | PNR005 |    58451 | 0000-00-00  | Bengaluru  | Mangaluru | 06:00:00       | 14:00:00     | USR_002 | Fast       | III Class        | G01            |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          | PNR012 |    58451 | 0000-00-00  | Subramanya | Mangaluru | 11:00:00       | 14:00:00     | USR_009 | Fast       | I Class          | F01            |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           | PNR002 |    62620 | 0000-00-00  | Chennai    | Bengaluru | 08:00:00       | 12:25:00     | ADM_001 | Superfast  | I Class          | F02            |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           | PNR008 |    62620 | 0000-00-00  | Chennai    | Bangarpet | 08:00:00       | 09:00:00     | ADM_002 | Superfast  | I Class          | F01            |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          | PNR001 |    62621 | 0000-00-00  | Bengaluru  | Chennai   | 16:00:00       | 20:30:00     | ADM_001 | Superfast  | I Class          | F01            |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          | PNR007 |    62621 | 0000-00-00  | Bangarpet  | Chennai   | 18:00:00       | 20:30:00     | ADM_002 | Superfast  | II Class         | S01            |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          | PNR011 |    62621 | 0000-00-00  | Katapadi   | Chennai   | 19:00:00       | 20:30:00     | USR_008 | Superfast  | I Class          | F01            |
++----------+------------------+------------+-----------+-------------+--------------+--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+9 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Train_No,Name,Train_type,Source,Destination from train_415 join ticket_415 on train_415.Train_No = ticket_415.Train_No where ticket_415.train_type != "mail";
+ERROR 1052 (23000): Column 'Train_No' in field list is ambiguous
+MariaDB [railwayticket_415]> select ticket_415.Train_No,Name,Train_type,Source,Destination from train_415 join ticket_415 on train_415.Train_No = ticket_415.Train_No where ticket_415.train_type != "mail";
+ERROR 1052 (23000): Column 'Train_type' in field list is ambiguous
+MariaDB [railwayticket_415]> select ticket_415.Train_No,Name,ticket_415.Train_type,Source,Destination from train_415 join ticket_415 on train_415.Train_No = ticket_415.Train_No where ticket_415.train_type != "mail";
++----------+------------------+------------+-----------+-------------+
+| Train_No | Name             | Train_type | Source    | Destination |
++----------+------------------+------------+-----------+-------------+
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     |
++----------+------------------+------------+-----------+-------------+
+9 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Name from train_415 where (To_STN="Bangalore" and From_STN="Chennai")
+    -> ;
+ERROR 1054 (42S22): Unknown column 'To_STN' in 'where clause'
+MariaDB [railwayticket_415]> select Name from train_415 where (Destination="Bangalore" and Source="Chennai")
+    -> ;
+Empty set (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|        0 | Name             | Train_Type | Source    | Destination | Availability |
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+7 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from ticket_415;
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR    | Train_No | Travel_Date | Departure  | Arrival   | Departure_Time | Arrival_Time | User_ID |Train_Type | Compartment_Type | Compartment_No |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR001 |    62621 | 0000-00-00  | Bengaluru  | Chennai   | 16:00:00       | 20:30:00     | ADM_001 |Superfast  | I Class
+| F01            |
+| PNR002 |    62620 | 0000-00-00  | Chennai    | Bengaluru | 08:00:00       | 12:25:00     | ADM_001 |Superfast  | I Class
+| F02            |
+| PNR003 |    25261 | 0000-00-00  | Chennai    | Mangaluru | 18:00:00       | 07:30:00     | ADM_003 |Mail       | III Class        | G02            |
+| PNR004 |    25260 | 0000-00-00  | Mangaluru  | Chennai   | 19:15:00       | 08:00:00     | ADM_003 |Mail       | II Class
+| S02            |
+| PNR005 |    58451 | 0000-00-00  | Bengaluru  | Mangaluru | 06:00:00       | 14:00:00     | USR_002 |Fast       | III Class        | G01            |
+| PNR006 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class
+| S01            |
+| PNR007 |    62621 | 0000-00-00  | Bangarpet  | Chennai   | 18:00:00       | 20:30:00     | ADM_002 |Superfast  | II Class
+| S01            |
+| PNR008 |    62620 | 0000-00-00  | Chennai    | Bangarpet | 08:00:00       | 09:00:00     | ADM_002 |Superfast  | I Class
+| F01            |
+| PNR009 |    25261 | 2022-09-07  | Mangalore  | Banglaore | 16:22:39       | 22:22:39     | USR_007 |Mail       | II Class
+| G01            |
+| PNR010 |    25260 | 0000-00-00  | Mangaluru  | Kannur    | 19:15:00       | 23:15:00     | USR_007 |Mail       | II Class
+| S01            |
+| PNR011 |    62621 | 0000-00-00  | Katapadi   | Chennai   | 19:00:00       | 20:30:00     | USR_008 |Superfast  | I Class
+| F01            |
+| PNR012 |    58451 | 0000-00-00  | Subramanya | Mangaluru | 11:00:00       | 14:00:00     | USR_009 |Fast       | I Class
+| F01            |
+| PNR013 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class
+| S01            |
+| PNR014 |    25260 | 0000-00-00  | Kannur     | Palakkad  | 23:15:00       | 04:30:00     | USR_010 |Mail       | II Class
+| S01            |
+| PNR015 |    25260 | 0000-00-00  | Palakkad   | Chennai   | 04:30:00       | 08:00:00     | USR_012 |Mail       | II Class
+| S01            |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+15 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select Name from train_415 where (Source="Bangalore" and Destination="Chennai")
+    -> ;
+Empty set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Name from train_415 where (Source="Bangaluru" and Destination="Chennai")
+    -> ;
+Empty set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Name from train_415 where (Source="Bengaluru" and Destination="Chennai")
+    -> ;
++------------------+
+| Name             |
++------------------+
+| BEN-CHE Shatabdi |
++------------------+
+1 row in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select ticket_415.Train_No,Name,ticket_415.Train_type,Source,Destination from train_415 where ticket_415.train_type != "mail";
+ERROR 1054 (42S22): Unknown column 'ticket_415.Train_No' in 'field list'
+MariaDB [railwayticket_415]> select Train_No,Name,Train_type,Source,Destination from train_415 where ticket_415.train_type != "mail";
+ERROR 1054 (42S22): Unknown column 'ticket_415.train_type' in 'where clause'
+MariaDB [railwayticket_415]> select Train_No,Name,Train_type,Source,Destination from train_415 where train_type != "mail";
++----------+------------------+------------+-----------+-------------+
+| Train_No | Name             | Train_type | Source    | Destination |
++----------+------------------+------------+-----------+-------------+
+|        0 | Name             | Train_Type | Source    | Destination |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     |
++----------+------------------+------------+-----------+-------------+
+5 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> delete from train_415 where name="name";
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [railwayticket_415]> select Train_No,Name,Train_type,Source,Destination from train_415 where train_type != "mail";
++----------+------------------+------------+-----------+-------------+
+| Train_No | Name             | Train_type | Source    | Destination |
++----------+------------------+------------+-----------+-------------+
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     |
++----------+------------------+------------+-----------+-------------+
+4 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from ticket_415;]
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR    | Train_No | Travel_Date | Departure  | Arrival   | Departure_Time | Arrival_Time | User_ID |Train_Type | Compartment_Type | Compartment_No |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR001 |    62621 | 0000-00-00  | Bengaluru  | Chennai   | 16:00:00       | 20:30:00     | ADM_001 |Superfast  | I Class
+| F01            |
+| PNR002 |    62620 | 0000-00-00  | Chennai    | Bengaluru | 08:00:00       | 12:25:00     | ADM_001 |Superfast  | I Class
+| F02            |
+| PNR003 |    25261 | 0000-00-00  | Chennai    | Mangaluru | 18:00:00       | 07:30:00     | ADM_003 |Mail       | III Class        | G02            |
+| PNR004 |    25260 | 0000-00-00  | Mangaluru  | Chennai   | 19:15:00       | 08:00:00     | ADM_003 |Mail       | II Class
+| S02            |
+| PNR005 |    58451 | 0000-00-00  | Bengaluru  | Mangaluru | 06:00:00       | 14:00:00     | USR_002 |Fast       | III Class        | G01            |
+| PNR006 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class
+| S01            |
+| PNR007 |    62621 | 0000-00-00  | Bangarpet  | Chennai   | 18:00:00       | 20:30:00     | ADM_002 |Superfast  | II Class
+| S01            |
+| PNR008 |    62620 | 0000-00-00  | Chennai    | Bangarpet | 08:00:00       | 09:00:00     | ADM_002 |Superfast  | I Class
+| F01            |
+| PNR009 |    25261 | 2022-09-07  | Mangalore  | Banglaore | 16:22:39       | 22:22:39     | USR_007 |Mail       | II Class
+| G01            |
+| PNR010 |    25260 | 0000-00-00  | Mangaluru  | Kannur    | 19:15:00       | 23:15:00     | USR_007 |Mail       | II Class
+| S01            |
+| PNR011 |    62621 | 0000-00-00  | Katapadi   | Chennai   | 19:00:00       | 20:30:00     | USR_008 |Superfast  | I Class
+| F01            |
+| PNR012 |    58451 | 0000-00-00  | Subramanya | Mangaluru | 11:00:00       | 14:00:00     | USR_009 |Fast       | I Class
+| F01            |
+| PNR013 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class
+| S01            |
+| PNR014 |    25260 | 0000-00-00  | Kannur     | Palakkad  | 23:15:00       | 04:30:00     | USR_010 |Mail       | II Class
+| S01            |
+| PNR015 |    25260 | 0000-00-00  | Palakkad   | Chennai   | 04:30:00       | 08:00:00     | USR_012 |Mail       | II Class
+| S01            |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+15 rows in set (0.001 sec)
+
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ']' at line 1
+MariaDB [railwayticket_415]> select Train_no,Train_type,Arrival,Departure,Departure_Time from ticket_415 where Departure_Time > 8;
++----------+------------+-----------+------------+----------------+
+| Train_no | Train_type | Arrival   | Departure  | Departure_Time |
++----------+------------+-----------+------------+----------------+
+|    62621 | Superfast  | Chennai   | Bengaluru  | 16:00:00       |
+|    62620 | Superfast  | Bengaluru | Chennai    | 08:00:00       |
+|    25261 | Mail       | Mangaluru | Chennai    | 18:00:00       |
+|    25260 | Mail       | Chennai   | Mangaluru  | 19:15:00       |
+|    58451 | Fast       | Mangaluru | Bengaluru  | 06:00:00       |
+|    58450 | Fast       | Bengaluru | Mangaluru  | 08:00:00       |
+|    62621 | Superfast  | Chennai   | Bangarpet  | 18:00:00       |
+|    62620 | Superfast  | Bangarpet | Chennai    | 08:00:00       |
+|    25261 | Mail       | Banglaore | Mangalore  | 16:22:39       |
+|    25260 | Mail       | Kannur    | Mangaluru  | 19:15:00       |
+|    62621 | Superfast  | Chennai   | Katapadi   | 19:00:00       |
+|    58451 | Fast       | Mangaluru | Subramanya | 11:00:00       |
+|    58450 | Fast       | Bengaluru | Mangaluru  | 08:00:00       |
+|    25260 | Mail       | Palakkad  | Kannur     | 23:15:00       |
+|    25260 | Mail       | Chennai   | Palakkad   | 04:30:00       |
++----------+------------+-----------+------------+----------------+
+15 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Train_no,Train_type,Arrival,Departure,Departure_Time from ticket_415 where Departure_Time > 08:00:00;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':00:00' at line 1
+MariaDB [railwayticket_415]> select Train_no,Train_type,Arrival,Departure,Departure_Time from ticket_415 where (Departure = "Chennai")and (Departure_Time > "08:00:00");
++----------+------------+-----------+-----------+----------------+
+| Train_no | Train_type | Arrival   | Departure | Departure_Time |
++----------+------------+-----------+-----------+----------------+
+|    25261 | Mail       | Mangaluru | Chennai   | 18:00:00       |
++----------+------------+-----------+-----------+----------------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from user_415;
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| User_ID | User_Type | FName      | LName     | Age  | DOB        | Pincode | Street_Number   |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| ADM_001 | ADMIN     | Narendra   | Modi      | 33   | 1989-04-14 |  600047 | Old Jail Road   |
+| ADM_002 | ADMIN     | Droupadi   | Murmu     | 32   | 1990-04-14 |  640012 | High Street   |
+| ADM_003 | ADMIN     | Manmohan   | Singh     | 31   | 1991-04-08 |  575003 | Pumpwell Road   |
+| USR_001 | PSGR      |   Ajit     | Ullal     | 51   | 1971-01-01 |  560001 | 10 Janpath   |
+| USR_002 | PSGR      | Muhammed   | Ali       | 21   | 2000-10-09 |  560003 | 10 Downing   |
+| USR_003 | PSGR      | Sai Deepak | Reddy     | 25   | 1996-12-12 |  600001 | 14 Kailsh Marg   |
+| USR_004 | PSGR      | Rudra      | Agarwal   | 25   | 1996-12-13 |  600042 | 5 Lohia Garden   |
+| USR_005 | PSGR      | Rahul      | Khanna    | 24   | 1997-12-14 |  600067 | 1 Pink Street
+    |
+| USR_006 | PSGR      | Nirmala    | Seturaman | 23   | 1998-12-15 |  560105 | 3 Blue Avenue
+    |
+| USR_007 | PSGR      | Smriti     | Irani     | 22   | 1999-12-16 |  575014 | 4 Banyan Avenie   |
+| USR_008 | PSGR      | Ajit       | Sethi     | 56   | 1966-04-14 |  575001 | 6 Poes Garden
+    |
+| USR_009 | PSGR      | Arjun      | Allu      | 55   | 1967-04-08 |  575020 | 7 Dhamaka street   |
+| USR_010 | PSGR      | Samanta    | Prabhu    | 54   | 1968-04-14 |  600042 | 8 Clone Colony
+    |
+| USR_011 | PSGR      | Kiran      | Bedi      | 53   | 1969-04-14 |  560003 | 56 Brigade Road   |
+| USR_012 | PSGR      | Rahul      | Gandhi    | 52   | 1970-04-08 |  475001 | Mirza road
+    |
+| USR_013 | PSGR      | Rashkit    | Shetty    | 51   | 1971-04-14 |  560009 | JC Road
+    |
+| USR_014 | PSGR      | Rishi      | Sunak     | 50   | 1972-04-14 |  600034 | Anna Sali
+    |
+| USR_015 | PSGR      | Vedavalli  | Srinath   | 49   | 1973-04-14 |  560054 | Church Street Bangalore   |
+| USR_016 | PSGR      | Subbu      | Saravana  | 48   | 1974-04-14 |  600043 | American Street   |
+| USR_017 | PSGR      | Sheela     | Dixit     | 47   | 1975-04-08 |  560048 | Kasturba Road
+    |
+| USR_018 | PSGR      | Margaret   | Alva      | 46   | 1976-04-14 |  560008 | New BEL Road
+    |
+| USR_019 | PSGR      | Arun       | Kumar     | 45   | 1977-04-14 |  600046 | Mint Street
+    |
+| USR_020 | PSGR      | Anshu      | Bhardwaj  | 44   | 1978-04-14 |  575001 | KSR Road
+    |
+| USR_021 | PSGR      | Suma       | Sampat    | 43   | 1979-04-08 |  560012 | Old Airport Road Bangalore |
+| USR_022 | PSGR      | Srihari    | Udupa     | 42   | 1980-04-14 |  560015 | Suranjan Das Road   |
+| USR_023 | PSGR      | Satish     | Kotian    | 41   | 1981-04-14 |  600044 | T Nagar
+    |
+| USR_024 | PSGR      | Shradha    | Nayar     | 40   | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha    | Solanki   | 39   | 1983-04-08 |  575030 | M G Road
+    |
+| USR_026 | PSGR      | Bharti     | Devgan    | 38   | 1984-04-14 |  560059 | NAL Wind Tunnel Road   |
+| USR_027 | PSGR      | Roopa      | Ram       | 37   | 1985-04-14 |  575023 | Bunder Road
+    |
+| USR_028 | PSGR      | Pallavi    | Ram       | 36   | 1986-04-08 |  560044 | Lavelle Road
+    |
+| USR_029 | PSGR      | Ravi       | Naik      | 35   | 1987-04-14 |  600045 | Thiru V ka Salai   |
+| USR_030 | PSGR      | Virat      | Murthy    | 34   | 1988-04-14 |  575011 | Bejai New Road
+    |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+33 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select user_id,FName,Lname,Age,Pincode,Street_number from user_415 where Fname="S%";
+Empty set (0.001 sec)
+
+MariaDB [railwayticket_415]> select user_id,FName,Lname,Age,Pincode,Street_number from user_415 where Fname like "S%";
++---------+------------+----------+------+---------+----------------------------+
+| user_id | FName      | Lname    | Age  | Pincode | Street_number              |
++---------+------------+----------+------+---------+----------------------------+
+| USR_003 | Sai Deepak | Reddy    | 25   |  600001 | 14 Kailsh Marg             |
+| USR_007 | Smriti     | Irani    | 22   |  575014 | 4 Banyan Avenie            |
+| USR_010 | Samanta    | Prabhu   | 54   |  600042 | 8 Clone Colony             |
+| USR_016 | Subbu      | Saravana | 48   |  600043 | American Street            |
+| USR_017 | Sheela     | Dixit    | 47   |  560048 | Kasturba Road              |
+| USR_021 | Suma       | Sampat   | 43   |  560012 | Old Airport Road Bangalore |
+| USR_022 | Srihari    | Udupa    | 42   |  560015 | Suranjan Das Road          |
+| USR_023 | Satish     | Kotian   | 41   |  600044 | T Nagar                    |
+| USR_024 | Shradha    | Nayar    | 40   |  560006 | M G Road Bangalore         |
++---------+------------+----------+------+---------+----------------------------+
+9 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> Select * from ticket
+    -> _415;
+ERROR 1146 (42S02): Table 'railwayticket_415.ticket' doesn't exist
+MariaDB [railwayticket_415]> Select * from ticket_415;
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR    | Train_No | Travel_Date | Departure  | Arrival   | Departure_Time | Arrival_Time | User_ID |Train_Type | Compartment_Type | Compartment_No |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+| PNR001 |    62621 | 0000-00-00  | Bengaluru  | Chennai   | 16:00:00       | 20:30:00     | ADM_001 |Superfast  | I Class          | F01            |
+| PNR002 |    62620 | 0000-00-00  | Chennai    | Bengaluru | 08:00:00       | 12:25:00     | ADM_001 |Superfast  | I Class          | F02            |
+| PNR003 |    25261 | 0000-00-00  | Chennai    | Mangaluru | 18:00:00       | 07:30:00     | ADM_003 |Mail       | III Class        | G02            |
+| PNR004 |    25260 | 0000-00-00  | Mangaluru  | Chennai   | 19:15:00       | 08:00:00     | ADM_003 |Mail       | II Class         | S02            |
+| PNR005 |    58451 | 0000-00-00  | Bengaluru  | Mangaluru | 06:00:00       | 14:00:00     | USR_002 |Fast       | III Class        | G01            |
+| PNR006 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class         | S01            |
+| PNR007 |    62621 | 0000-00-00  | Bangarpet  | Chennai   | 18:00:00       | 20:30:00     | ADM_002 |Superfast  | II Class         | S01            |
+| PNR008 |    62620 | 0000-00-00  | Chennai    | Bangarpet | 08:00:00       | 09:00:00     | ADM_002 |Superfast  | I Class          | F01            |
+| PNR009 |    25261 | 2022-09-07  | Mangalore  | Banglaore | 16:22:39       | 22:22:39     | USR_007 |Mail       | II Class         | G01            |
+| PNR010 |    25260 | 0000-00-00  | Mangaluru  | Kannur    | 19:15:00       | 23:15:00     | USR_007 |Mail       | II Class         | S01            |
+| PNR011 |    62621 | 0000-00-00  | Katapadi   | Chennai   | 19:00:00       | 20:30:00     | USR_008 |Superfast  | I Class          | F01            |
+| PNR012 |    58451 | 0000-00-00  | Subramanya | Mangaluru | 11:00:00       | 14:00:00     | USR_009 |Fast       | I Class          | F01            |
+| PNR013 |    58450 | 0000-00-00  | Mangaluru  | Bengaluru | 08:00:00       | 10:15:00     | USR_002 |Fast       | II Class         | S01            |
+| PNR014 |    25260 | 0000-00-00  | Kannur     | Palakkad  | 23:15:00       | 04:30:00     | USR_010 |Mail       | II Class         | S01            |
+| PNR015 |    25260 | 0000-00-00  | Palakkad   | Chennai   | 04:30:00       | 08:00:00     | USR_012 |Mail       | II Class         | S01            |
++--------+----------+-------------+------------+-----------+----------------+--------------+---------+------------+------------------+----------------+
+15 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> Select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> Select * from compartment_415;
++----------------+------------------+----------+-------------+----------+
+| Compartment_No | Compartment_Type | Capacity | Availabilty | Train_No |
++----------------+------------------+----------+-------------+----------+
+| F01            | I Class          |       16 |           0 |    25260 |
+| F01            | I Class          |       16 |           0 |    25261 |
+| F01            | I Class          |       16 |           4 |    58450 |
+| F01            | I Class          |       16 |           5 |    58451 |
+| F01            | I Class          |       16 |          15 |    62620 |
+| F01            | I Class          |       16 |           6 |    62621 |
+| F02            | I Class          |       16 |           0 |    62620 |
+| G01            | III Class        |       60 |          33 |    25261 |
+| G01            | III Class        |       60 |           2 |    58450 |
+| G01            | III Class        |       60 |          40 |    58451 |
+| G01            | III Class        |       60 |          10 |    62621 |
+| G02            | III Class        |       60 |          45 |    25261 |
+| G02            | III Class        |       60 |          12 |    62621 |
+| S01            | II Class         |       30 |          15 |    25260 |
+| S01            | II Class         |       30 |          15 |    25261 |
+| S01            | II Class         |       30 |           5 |    58450 |
+| S01            | II Class         |       30 |           4 |    62621 |
+| S02            | II Class         |       30 |          17 |    25260 |
+| S02            | II Class         |       30 |           3 |    58450 |
+| S02            | II Class         |       30 |           6 |    62621 |
++----------------+------------------+----------+-------------+----------+
+20 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select availability from compartment_415 where train_no=62621 and compartment_type="I";
+ERROR 1054 (42S22): Unknown column 'availability' in 'field list'
+MariaDB [railwayticket_415]> select Availability from compartment_415 where train_no=62621 and compartment_type="I";
+ERROR 1054 (42S22): Unknown column 'Availability' in 'field list'
+MariaDB [railwayticket_415]> select Availabilty from compartment_415 where train_no=62621 and compartment_type="I";
+Empty set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Availabilty from compartment_415 where train_no=62621;
++-------------+
+| Availabilty |
++-------------+
+|           6 |
+|          10 |
+|          12 |
+|           4 |
+|           6 |
++-------------+
+5 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select Availabilty from compartment_415 where train_no=62621 and compartment_type="I Class";
++-------------+
+| Availabilty |
++-------------+
+|           6 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from payment_415;
++----------------+-------------+------------------+-------+--------+
+| Transaction_No | Bank        | Card_No          | Price | PNR    |
++----------------+-------------+------------------+-------+--------+
+| 146445         | HDFC        | 1.23433E+15      |  NULL | PNR006 |
+| 342344         | IOB         | 5.62357E+15      |  NULL | PNR001 |
+| 531343         | SBI         | 8.95327E+15      |  NULL | PNR004 |
+| 576768         | ICICI       | 7.56356E+15      |  NULL | PNR007 |
+| 676756         | CANARA BANK | 7.36756E+15      |  NULL | PNR002 |
+| 746745         | KOTAK       | 2.54564E+15      |  NULL | PNR008 |
+| 978098         | INDIAN BANK | 9.88733E+15      |  NULL | PNR005 |
+| 978776         | UNION BANK  | 1I54978597435874 |  NULL | PNR003 |
++----------------+-------------+------------------+-------+--------+
+8 rows in set (0.003 sec)
+
+MariaDB [railwayticket_415]> select transaction_no,PNR from payment_415 where Bank="Union Bank";
++----------------+--------+
+| transaction_no | PNR    |
++----------------+--------+
+| 978776         | PNR003 |
++----------------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from user_415 where Extract(YEAR from DOB)>=1980 and Extrsct(YEAR from DOB)<=1990;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from DOB)<=1990' at line 1
+MariaDB [railwayticket_415]> select * from user_415 where Extract(YEAR from DOB)>=1980 and Extract(YEAR from DOB)<=1990;
++---------+-----------+-----------+---------+------+------------+---------+----------------------+
+| User_ID | User_Type | FName     | LName   | Age  | DOB        | Pincode | Street_Number        |
++---------+-----------+-----------+---------+------+------------+---------+----------------------+
+| ADM_001 | ADMIN     | Narendra  | Modi    | 33   | 1989-04-14 |  600047 | Old Jail Road        |
+| ADM_002 | ADMIN     | Droupadi  | Murmu   | 32   | 1990-04-14 |  640012 | High Street          |
+| USR_022 | PSGR      | Srihari   | Udupa   | 42   | 1980-04-14 |  560015 | Suranjan Das Road    |
+| USR_023 | PSGR      | Satish    | Kotian  | 41   | 1981-04-14 |  600044 | T Nagar              |
+| USR_024 | PSGR      | Shradha   | Nayar   | 40   | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha   | Solanki | 39   | 1983-04-08 |  575030 | M G Road             |
+| USR_026 | PSGR      | Bharti    | Devgan  | 38   | 1984-04-14 |  560059 | NAL Wind Tunnel Road |
+| USR_027 | PSGR      | Roopa     | Ram     | 37   | 1985-04-14 |  575023 | Bunder Road          |
+| USR_028 | PSGR      | Pallavi   | Ram     | 36   | 1986-04-08 |  560044 | Lavelle Road         |
+| USR_029 | PSGR      | Ravi      | Naik    | 35   | 1987-04-14 |  600045 | Thiru V ka Salai     |
+| USR_030 | PSGR      | Virat     | Murthy  | 34   | 1988-04-14 |  575011 | Bejai New Road       |
++---------+-----------+-----------+---------+------+------------+---------+----------------------+
+11 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> grant all privilages on `railwayticket_415`.`train_415` to 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privilages on `railwayticket_415`.`train_415` to'shrujan415'@'localhost'' at line 1
+MariaDB [railwayticket_415]> grant all privileges on `railwayticket_415`.`train_415` to 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [railwayticket_415]> exit
+Bye
+  bin    .\mysql -u shrujan415 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 327
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| railwayticket_415  |
++--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [(none)]> use railwayticket_415;
+Database changed
+MariaDB [railwayticket_415]> show tables
+    -> ;
++-----------------------------+
+| Tables_in_railwayticket_415 |
++-----------------------------+
+| train_415                   |
++-----------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayticket_415]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 328
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privilages on `railwayticket_415`.* to 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privilages on `railwayticket_415`.* to 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> revoke all privileges on `railwayticket_415`.`train_415` to 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'to 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> revoke all privileges on `railwayticket_415`.`train_415` from 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [(none)]> grant all privileges on `railwayticket_415`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `railwayticket_415`.`train_415` to 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [(none)]> revoke UPDATE,DELETE privileges on `railwayticket_415`.`train_415` from 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privileges on `railwayticket_415`.`train_415` from 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> revoke UPDATE,DELETE on `railwayticket_415`.`train_415` from 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shrujan415 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 329
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use railwayticket_415;
+Database changed
+MariaDB [railwayticket_415]> show tables
+    -> ;
++-----------------------------+
+| Tables_in_railwayticket_415 |
++-----------------------------+
+| train_415                   |
++-----------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * form train_415;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'form train_415' at line 1
+MariaDB [railwayticket_415]> select * frmm train_415;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'frmm train_415' at line 1
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> savepoint sp1;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> delete from train_415 where train_no=25260;
+ERROR 1142 (42000): DELETE command denied to user 'shrujan415'@'localhost' for table 'train_415'
+MariaDB [railwayticket_415]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 332
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use railwayticket_415;
+Database changed
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> savepoint sp1;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> update train_415
+    -> set Availability="No" where train_no=25260;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | No           |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> rollback sp1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'sp1' at line 1
+MariaDB [railwayticket_415]> rollback to sp1;
+ERROR 1305 (42000): SAVEPOINT sp1 does not exist
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | No           |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> rollback to sp1;
+ERROR 1305 (42000): SAVEPOINT sp1 does not exist
+MariaDB [railwayticket_415]> savepoint spBD;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> show * from train_415;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* from train_415' at line 1
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | No           |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> savepoint spBD;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> set Availability="Yes" where train_no=25260;
+ERROR 1193 (HY000): Unknown system variable 'Availability'
+MariaDB [railwayticket_415]> update train_415 set Availability="No" where train_no=25260;
+Query OK, 0 rows affected (0.000 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+MariaDB [railwayticket_415]> update train_415 set Availability="Yes" where train_no=25260;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> rollback to spBD;
+ERROR 1305 (42000): SAVEPOINT spBD does not exist
+MariaDB [railwayticket_415]> savepoint spBD2;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> rollback to spBD;
+ERROR 1305 (42000): SAVEPOINT spBD does not exist
+MariaDB [railwayticket_415]> rollback to spBD2;
+ERROR 1305 (42000): SAVEPOINT spBD2 does not exist
+MariaDB [railwayticket_415]> set autocommit=0
+    -> ;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> start transactions;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'transactions' at line 1
+MariaDB [railwayticket_415]>  start transactions;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'transactions' at line 1
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> savepoint spBD;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> update train_415 set Availability="No" where train_no=25260;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [railwayticket_415]> savepoint spBD2;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | No           |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> rollback to spBD;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 383
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++------------------------+
+| Database               |
++------------------------+
+| company                |
+| information_schema     |
+| mysql                  |
+| performance_schema     |
+| phpmyadmin             |
+| railwayreservation_410 |
+| railwayticket_415      |
+| test                   |
++------------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [(none)]> create user 'shreyash410'@'localhost' identified by '410';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [(none)]> grant all privileges on `railwayreservation_410`.`user_410` to 'shreyash410'@'localhost';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shreyash410 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 384
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use railwayreservation_410;
+Database changed
+MariaDB [railwayreservation_410]> show tables;
++----------------------------------+
+| Tables_in_railwayreservation_410 |
++----------------------------------+
+| user_410                         |
++----------------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayreservation_410]> select * from user_410;
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| User_ID | User_Type | FName      | LName     | Age  | DOB        | PinCode | Street_Number
+    |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| ADM_001 | ADMIN     | Narendra   | Modi      | 33   | 1989-04-14 |  600047 | Old Jail Road
+    |
+| ADM_002 | ADMIN     | Droupadi   | Murmu     | 32   | 1990-04-14 |  640012 | High Street
+    |
+| ADM_003 | ADMIN     | Manmohan   | Singh     | 31   | 1991-04-08 |  575003 | Pumpwell Road
+    |
+| USR_001 | PSGR      |   Ajit     | Ullal     | 51   | 1971-01-01 |  560001 | 10 Janpath
+    |
+| USR_002 | PSGR      | Muhammed   | Ali       | 21   | 2000-10-09 |  560003 | 10 Downing
+    |
+| USR_003 | PSGR      | Sai Deepak | Reddy     | 25   | 1996-12-12 |  600001 | 14 Kailsh Marg
+    |
+| USR_004 | PSGR      | Rudra      | Agarwal   | 25   | 1996-12-13 |  600042 | 5 Lohia Garden
+    |
+| USR_005 | PSGR      | Rahul      | Khanna    | 24   | 1997-12-14 |  600067 | 1 Pink Street
+    |
+| USR_006 | PSGR      | Nirmala    | Seturaman | 23   | 1998-12-15 |  560105 | 3 Blue Avenue
+    |
+| USR_007 | PSGR      | Smriti     | Irani     | 22   | 1999-12-16 |  575014 | 4 Banyan Avenie   |
+| USR_008 | PSGR      | Ajit       | Sethi     | 56   | 1966-04-14 |  575001 | 6 Poes Garden
+    |
+| USR_009 | PSGR      | Arjun      | Allu      | 55   | 1967-04-08 |  575020 | 7 Dhamaka street   |
+| USR_010 | PSGR      | Samanta    | Prabhu    | 54   | 1968-04-14 |  600042 | 8 Clone Colony
+    |
+| USR_011 | PSGR      | Kiran      | Bedi      | 53   | 1969-04-14 |  560003 | 56 Brigade Road   |
+| USR_012 | PSGR      | Rahul      | Gandhi    | 52   | 1970-04-08 |  475001 | Mirza road
+    |
+| USR_013 | PSGR      | Rashkit    | Shetty    | 51   | 1971-04-14 |  560009 | JC Road
+    |
+| USR_014 | PSGR      | Rishi      | Sunak     | 50   | 1972-04-14 |  600034 | Anna Sali
+    |
+| USR_015 | PSGR      | Vedavalli  | Srinath   | 49   | 1973-04-14 |  560054 | Church Street Bangalore   |
+| USR_016 | PSGR      | Subbu      | Saravana  | 48   | 1974-04-14 |  600043 | American Street   |
+| USR_017 | PSGR      | Sheela     | Dixit     | 47   | 1975-04-08 |  560048 | Kasturba Road
+    |
+| USR_018 | PSGR      | Margaret   | Alva      | 46   | 1976-04-14 |  560008 | New BEL Road
+    |
+| USR_019 | PSGR      | Arun       | Kumar     | 45   | 1977-04-14 |  600046 | Mint Street
+    |
+| USR_020 | PSGR      | Anshu      | Bhardwaj  | 44   | 1978-04-14 |  575001 | KSR Road
+    |
+| USR_021 | PSGR      | Suma       | Sampat    | 43   | 1979-04-08 |  560012 | Old Airport Road Bangalore |
+| USR_022 | PSGR      | Srihari    | Udupa     | 42   | 1980-04-14 |  560015 | Suranjan Das Road   |
+| USR_023 | PSGR      | Satish     | Kotian    | 41   | 1981-04-14 |  600044 | T Nagar
+    |
+| USR_024 | PSGR      | Shradha    | Nayar     | 40   | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha    | Solanki   | 39   | 1983-04-08 |  575030 | M G Road
+    |
+| USR_026 | PSGR      | Bharti     | Devgan    | 38   | 1984-04-14 |  560059 | NAL Wind Tunnel Road   |
+| USR_027 | PSGR      | Roopa      | Ram       | 37   | 1985-04-14 |  575023 | Bunder Road
+    |
+| USR_028 | PSGR      | Pallavi    | Ram       | 36   | 1986-04-08 |  560044 | Lavelle Road
+    |
+| USR_029 | PSGR      | Ravi       | Naik      | 35   | 1987-04-14 |  600045 | Thiru V ka Salai   |
+| USR_030 | PSGR      | Virat      | Murthy    | 34   | 1988-04-14 |  575011 | Bejai New Road
+    |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+33 rows in set (0.001 sec)
+
+MariaDB [railwayreservation_410]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 385
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> revoke update, delete on `railwayreservation_410`.`user_410` from 'shreyash410'@'localhost';
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shreyash410 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 386
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use railwayreservation_410;
+Database changed
+MariaDB [railwayreservation_410]> show tables;
++----------------------------------+
+| Tables_in_railwayreservation_410 |
++----------------------------------+
+| user_410                         |
++----------------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayreservation_410]> select * from user_410;
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| User_ID | User_Type | FName      | LName     | Age  | DOB        | PinCode | Street_Number
+    |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| ADM_001 | ADMIN     | Narendra   | Modi      | 33   | 1989-04-14 |  600047 | Old Jail Road
+    |
+| ADM_002 | ADMIN     | Droupadi   | Murmu     | 32   | 1990-04-14 |  640012 | High Street
+    |
+| ADM_003 | ADMIN     | Manmohan   | Singh     | 31   | 1991-04-08 |  575003 | Pumpwell Road
+    |
+| USR_001 | PSGR      |   Ajit     | Ullal     | 51   | 1971-01-01 |  560001 | 10 Janpath
+    |
+| USR_002 | PSGR      | Muhammed   | Ali       | 21   | 2000-10-09 |  560003 | 10 Downing
+    |
+| USR_003 | PSGR      | Sai Deepak | Reddy     | 25   | 1996-12-12 |  600001 | 14 Kailsh Marg
+    |
+| USR_004 | PSGR      | Rudra      | Agarwal   | 25   | 1996-12-13 |  600042 | 5 Lohia Garden
+    |
+| USR_005 | PSGR      | Rahul      | Khanna    | 24   | 1997-12-14 |  600067 | 1 Pink Street
+    |
+| USR_006 | PSGR      | Nirmala    | Seturaman | 23   | 1998-12-15 |  560105 | 3 Blue Avenue
+    |
+| USR_007 | PSGR      | Smriti     | Irani     | 22   | 1999-12-16 |  575014 | 4 Banyan Avenie   |
+| USR_008 | PSGR      | Ajit       | Sethi     | 56   | 1966-04-14 |  575001 | 6 Poes Garden
+    |
+| USR_009 | PSGR      | Arjun      | Allu      | 55   | 1967-04-08 |  575020 | 7 Dhamaka street   |
+| USR_010 | PSGR      | Samanta    | Prabhu    | 54   | 1968-04-14 |  600042 | 8 Clone Colony
+    |
+| USR_011 | PSGR      | Kiran      | Bedi      | 53   | 1969-04-14 |  560003 | 56 Brigade Road   |
+| USR_012 | PSGR      | Rahul      | Gandhi    | 52   | 1970-04-08 |  475001 | Mirza road
+    |
+| USR_013 | PSGR      | Rashkit    | Shetty    | 51   | 1971-04-14 |  560009 | JC Road
+    |
+| USR_014 | PSGR      | Rishi      | Sunak     | 50   | 1972-04-14 |  600034 | Anna Sali
+    |
+| USR_015 | PSGR      | Vedavalli  | Srinath   | 49   | 1973-04-14 |  560054 | Church Street Bangalore   |
+| USR_016 | PSGR      | Subbu      | Saravana  | 48   | 1974-04-14 |  600043 | American Street   |
+| USR_017 | PSGR      | Sheela     | Dixit     | 47   | 1975-04-08 |  560048 | Kasturba Road
+    |
+| USR_018 | PSGR      | Margaret   | Alva      | 46   | 1976-04-14 |  560008 | New BEL Road
+    |
+| USR_019 | PSGR      | Arun       | Kumar     | 45   | 1977-04-14 |  600046 | Mint Street
+    |
+| USR_020 | PSGR      | Anshu      | Bhardwaj  | 44   | 1978-04-14 |  575001 | KSR Road
+    |
+| USR_021 | PSGR      | Suma       | Sampat    | 43   | 1979-04-08 |  560012 | Old Airport Road Bangalore |
+| USR_022 | PSGR      | Srihari    | Udupa     | 42   | 1980-04-14 |  560015 | Suranjan Das Road   |
+| USR_023 | PSGR      | Satish     | Kotian    | 41   | 1981-04-14 |  600044 | T Nagar
+    |
+| USR_024 | PSGR      | Shradha    | Nayar     | 40   | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha    | Solanki   | 39   | 1983-04-08 |  575030 | M G Road
+    |
+| USR_026 | PSGR      | Bharti     | Devgan    | 38   | 1984-04-14 |  560059 | NAL Wind Tunnel Road   |
+| USR_027 | PSGR      | Roopa      | Ram       | 37   | 1985-04-14 |  575023 | Bunder Road
+    |
+| USR_028 | PSGR      | Pallavi    | Ram       | 36   | 1986-04-08 |  560044 | Lavelle Road
+    |
+| USR_029 | PSGR      | Ravi       | Naik      | 35   | 1987-04-14 |  600045 | Thiru V ka Salai   |
+| USR_030 | PSGR      | Virat      | Murthy    | 34   | 1988-04-14 |  575011 | Bejai New Road
+    |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+33 rows in set (0.000 sec)
+
+MariaDB [railwayreservation_410]> set transaction;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [railwayreservation_410]> start transaction;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]> savepoint s1;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]> delete from user_410 where user_id = 'usr_030';
+ERROR 1142 (42000): DELETE command denied to user 'shreyash410'@'localhost' for table 'user_410'
+MariaDB [railwayreservation_410]> savepoint s2;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]> stop transaction;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'transaction' at line 1
+MariaDB [railwayreservation_410]> exirt
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exirt' at line 1
+MariaDB [railwayreservation_410]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 387
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privileges on `railwayreservation_410`.`user_410` to 'shreyash410'@'localhost';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shreyash410 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 388
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use railwayreservation_410;
+Database changed
+MariaDB [railwayreservation_410]> show tables;
++----------------------------------+
+| Tables_in_railwayreservation_410 |
++----------------------------------+
+| user_410                         |
++----------------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayreservation_410]> start transaction;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]> select * from user_410;
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| User_ID | User_Type | FName      | LName     | Age  | DOB        | PinCode | Street_Number
+    |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+| ADM_001 | ADMIN     | Narendra   | Modi      | 33   | 1989-04-14 |  600047 | Old Jail Road
+    |
+| ADM_002 | ADMIN     | Droupadi   | Murmu     | 32   | 1990-04-14 |  640012 | High Street
+    |
+| ADM_003 | ADMIN     | Manmohan   | Singh     | 31   | 1991-04-08 |  575003 | Pumpwell Road
+    |
+| USR_001 | PSGR      |   Ajit     | Ullal     | 51   | 1971-01-01 |  560001 | 10 Janpath
+    |
+| USR_002 | PSGR      | Muhammed   | Ali       | 21   | 2000-10-09 |  560003 | 10 Downing
+    |
+| USR_003 | PSGR      | Sai Deepak | Reddy     | 25   | 1996-12-12 |  600001 | 14 Kailsh Marg
+    |
+| USR_004 | PSGR      | Rudra      | Agarwal   | 25   | 1996-12-13 |  600042 | 5 Lohia Garden
+    |
+| USR_005 | PSGR      | Rahul      | Khanna    | 24   | 1997-12-14 |  600067 | 1 Pink Street
+    |
+| USR_006 | PSGR      | Nirmala    | Seturaman | 23   | 1998-12-15 |  560105 | 3 Blue Avenue
+    |
+| USR_007 | PSGR      | Smriti     | Irani     | 22   | 1999-12-16 |  575014 | 4 Banyan Avenie   |
+| USR_008 | PSGR      | Ajit       | Sethi     | 56   | 1966-04-14 |  575001 | 6 Poes Garden
+    |
+| USR_009 | PSGR      | Arjun      | Allu      | 55   | 1967-04-08 |  575020 | 7 Dhamaka street   |
+| USR_010 | PSGR      | Samanta    | Prabhu    | 54   | 1968-04-14 |  600042 | 8 Clone Colony
+    |
+| USR_011 | PSGR      | Kiran      | Bedi      | 53   | 1969-04-14 |  560003 | 56 Brigade Road   |
+| USR_012 | PSGR      | Rahul      | Gandhi    | 52   | 1970-04-08 |  475001 | Mirza road
+    |
+| USR_013 | PSGR      | Rashkit    | Shetty    | 51   | 1971-04-14 |  560009 | JC Road
+    |
+| USR_014 | PSGR      | Rishi      | Sunak     | 50   | 1972-04-14 |  600034 | Anna Sali
+    |
+| USR_015 | PSGR      | Vedavalli  | Srinath   | 49   | 1973-04-14 |  560054 | Church Street Bangalore   |
+| USR_016 | PSGR      | Subbu      | Saravana  | 48   | 1974-04-14 |  600043 | American Street   |
+| USR_017 | PSGR      | Sheela     | Dixit     | 47   | 1975-04-08 |  560048 | Kasturba Road
+    |
+| USR_018 | PSGR      | Margaret   | Alva      | 46   | 1976-04-14 |  560008 | New BEL Road
+    |
+| USR_019 | PSGR      | Arun       | Kumar     | 45   | 1977-04-14 |  600046 | Mint Street
+    |
+| USR_020 | PSGR      | Anshu      | Bhardwaj  | 44   | 1978-04-14 |  575001 | KSR Road
+    |
+| USR_021 | PSGR      | Suma       | Sampat    | 43   | 1979-04-08 |  560012 | Old Airport Road Bangalore |
+| USR_022 | PSGR      | Srihari    | Udupa     | 42   | 1980-04-14 |  560015 | Suranjan Das Road   |
+| USR_023 | PSGR      | Satish     | Kotian    | 41   | 1981-04-14 |  600044 | T Nagar
+    |
+| USR_024 | PSGR      | Shradha    | Nayar     | 40   | 1982-04-08 |  560006 | M G Road Bangalore   |
+| USR_025 | PSGR      | Manisha    | Solanki   | 39   | 1983-04-08 |  575030 | M G Road
+    |
+| USR_026 | PSGR      | Bharti     | Devgan    | 38   | 1984-04-14 |  560059 | NAL Wind Tunnel Road   |
+| USR_027 | PSGR      | Roopa      | Ram       | 37   | 1985-04-14 |  575023 | Bunder Road
+    |
+| USR_028 | PSGR      | Pallavi    | Ram       | 36   | 1986-04-08 |  560044 | Lavelle Road
+    |
+| USR_029 | PSGR      | Ravi       | Naik      | 35   | 1987-04-14 |  600045 | Thiru V ka Salai   |
+| USR_030 | PSGR      | Virat      | Murthy    | 34   | 1988-04-14 |  575011 | Bejai New Road
+    |
++---------+-----------+------------+-----------+------+------------+---------+----------------------------+
+33 rows in set (0.001 sec)
+
+MariaDB [railwayreservation_410]> savepoint s1;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]> delete from user_410 where fname = 'Virat' and lname = 'Murthy';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`railwayreservation_410`.`phone_410`, CONSTRAINT `phone_410_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `user_410` (`User_ID`))
+MariaDB [railwayreservation_410]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 389
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privileges on `railwayreservation_410`.`phone_410` to 'shreyash410'@'localhost';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shreyash410 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 390
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use railwayreservation_410;
+Database changed
+MariaDB [railwayreservation_410]> select * from phone_410;
++---------+------------+
+| User_ID | Phone      |
++---------+------------+
+| ADM_001 | 9900123456 |
+| ADM_001 | 9845012345 |
+| ADM_002 | 9900123456 |
+| ADM_002 | 9845012345 |
+| ADM_003 | 9900123456 |
+| ADM_003 | 9845012345 |
+| USR_001 | 9900123456 |
+| USR_001 | 9845012345 |
+| USR_002 | 9900123456 |
+| USR_002 | 9845012345 |
+| USR_003 | 9900123456 |
+| USR_003 | 9845012345 |
+| USR_004 | 9900123456 |
+| USR_004 | 9845012345 |
+| USR_005 | 9900123456 |
+| USR_005 | 9845012345 |
+| USR_006 | 9900123456 |
+| USR_006 | 9845012345 |
+| USR_007 | 9900123456 |
+| USR_007 | 9845012345 |
+| USR_008 | 9900123456 |
+| USR_008 | 9845012345 |
+| USR_009 | 9900123456 |
+| USR_009 | 9845012345 |
+| USR_010 | 9900123456 |
+| USR_010 | 9845012345 |
+| USR_011 | 9900123456 |
+| USR_011 | 9845012345 |
+| USR_012 | 9900123456 |
+| USR_012 | 9845012345 |
+| USR_013 | 9900123456 |
+| USR_013 | 9845012345 |
+| USR_014 | 9900123456 |
+| USR_014 | 9845012345 |
+| USR_015 | 9900123456 |
+| USR_015 | 9845012345 |
+| USR_016 | 9900123456 |
+| USR_016 | 9845012345 |
+| USR_017 | 9900123456 |
+| USR_017 | 9845012345 |
+| USR_018 | 9900123456 |
+| USR_018 | 9845012345 |
+| USR_019 | 9900123456 |
+| USR_019 | 9845012345 |
+| USR_020 | 9900123456 |
+| USR_020 | 9845012345 |
+| USR_021 | 9900123456 |
+| USR_021 | 9845012345 |
+| USR_022 | 9900123456 |
+| USR_022 | 9845012345 |
+| USR_023 | 9900123456 |
+| USR_023 | 9845012345 |
+| USR_024 | 9900123456 |
+| USR_024 | 9845012345 |
+| USR_025 | 9900123456 |
+| USR_025 | 9845012345 |
+| USR_026 | 9900123456 |
+| USR_026 | 9845012345 |
+| USR_027 | 9900123456 |
+| USR_027 | 9845012345 |
+| USR_028 | 9900123456 |
+| USR_028 | 9845012345 |
+| USR_029 | 9900123456 |
+| USR_029 | 9845012345 |
+| USR_030 | 9900123456 |
+| USR_030 | 9845012345 |
++---------+------------+
+66 rows in set (0.000 sec)
+
+MariaDB [railwayreservation_410]> start transaction;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]> savepoint s1;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]> delete from phone_410 where user_id = 'USR_030';
+Query OK, 2 rows affected (0.001 sec)
+
+MariaDB [railwayreservation_410]> select * from phone_410;
++---------+------------+
+| User_ID | Phone      |
++---------+------------+
+| ADM_001 | 9900123456 |
+| ADM_001 | 9845012345 |
+| ADM_002 | 9900123456 |
+| ADM_002 | 9845012345 |
+| ADM_003 | 9900123456 |
+| ADM_003 | 9845012345 |
+| USR_001 | 9900123456 |
+| USR_001 | 9845012345 |
+| USR_002 | 9900123456 |
+| USR_002 | 9845012345 |
+| USR_003 | 9900123456 |
+| USR_003 | 9845012345 |
+| USR_004 | 9900123456 |
+| USR_004 | 9845012345 |
+| USR_005 | 9900123456 |
+| USR_005 | 9845012345 |
+| USR_006 | 9900123456 |
+| USR_006 | 9845012345 |
+| USR_007 | 9900123456 |
+| USR_007 | 9845012345 |
+| USR_008 | 9900123456 |
+| USR_008 | 9845012345 |
+| USR_009 | 9900123456 |
+| USR_009 | 9845012345 |
+| USR_010 | 9900123456 |
+| USR_010 | 9845012345 |
+| USR_011 | 9900123456 |
+| USR_011 | 9845012345 |
+| USR_012 | 9900123456 |
+| USR_012 | 9845012345 |
+| USR_013 | 9900123456 |
+| USR_013 | 9845012345 |
+| USR_014 | 9900123456 |
+| USR_014 | 9845012345 |
+| USR_015 | 9900123456 |
+| USR_015 | 9845012345 |
+| USR_016 | 9900123456 |
+| USR_016 | 9845012345 |
+| USR_017 | 9900123456 |
+| USR_017 | 9845012345 |
+| USR_018 | 9900123456 |
+| USR_018 | 9845012345 |
+| USR_019 | 9900123456 |
+| USR_019 | 9845012345 |
+| USR_020 | 9900123456 |
+| USR_020 | 9845012345 |
+| USR_021 | 9900123456 |
+| USR_021 | 9845012345 |
+| USR_022 | 9900123456 |
+| USR_022 | 9845012345 |
+| USR_023 | 9900123456 |
+| USR_023 | 9845012345 |
+| USR_024 | 9900123456 |
+| USR_024 | 9845012345 |
+| USR_025 | 9900123456 |
+| USR_025 | 9845012345 |
+| USR_026 | 9900123456 |
+| USR_026 | 9845012345 |
+| USR_027 | 9900123456 |
+| USR_027 | 9845012345 |
+| USR_028 | 9900123456 |
+| USR_028 | 9845012345 |
+| USR_029 | 9900123456 |
+| USR_029 | 9845012345 |
++---------+------------+
+64 rows in set (0.000 sec)
+
+MariaDB [railwayreservation_410]> rollback to s1;
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [railwayreservation_410]> select * from phone_410;
++---------+------------+
+| User_ID | Phone      |
++---------+------------+
+| ADM_001 | 9900123456 |
+| ADM_001 | 9845012345 |
+| ADM_002 | 9900123456 |
+| ADM_002 | 9845012345 |
+| ADM_003 | 9900123456 |
+| ADM_003 | 9845012345 |
+| USR_001 | 9900123456 |
+| USR_001 | 9845012345 |
+| USR_002 | 9900123456 |
+| USR_002 | 9845012345 |
+| USR_003 | 9900123456 |
+| USR_003 | 9845012345 |
+| USR_004 | 9900123456 |
+| USR_004 | 9845012345 |
+| USR_005 | 9900123456 |
+| USR_005 | 9845012345 |
+| USR_006 | 9900123456 |
+| USR_006 | 9845012345 |
+| USR_007 | 9900123456 |
+| USR_007 | 9845012345 |
+| USR_008 | 9900123456 |
+| USR_008 | 9845012345 |
+| USR_009 | 9900123456 |
+| USR_009 | 9845012345 |
+| USR_010 | 9900123456 |
+| USR_010 | 9845012345 |
+| USR_011 | 9900123456 |
+| USR_011 | 9845012345 |
+| USR_012 | 9900123456 |
+| USR_012 | 9845012345 |
+| USR_013 | 9900123456 |
+| USR_013 | 9845012345 |
+| USR_014 | 9900123456 |
+| USR_014 | 9845012345 |
+| USR_015 | 9900123456 |
+| USR_015 | 9845012345 |
+| USR_016 | 9900123456 |
+| USR_016 | 9845012345 |
+| USR_017 | 9900123456 |
+| USR_017 | 9845012345 |
+| USR_018 | 9900123456 |
+| USR_018 | 9845012345 |
+| USR_019 | 9900123456 |
+| USR_019 | 9845012345 |
+| USR_020 | 9900123456 |
+| USR_020 | 9845012345 |
+| USR_021 | 9900123456 |
+| USR_021 | 9845012345 |
+| USR_022 | 9900123456 |
+| USR_022 | 9845012345 |
+| USR_023 | 9900123456 |
+| USR_023 | 9845012345 |
+| USR_024 | 9900123456 |
+| USR_024 | 9845012345 |
+| USR_025 | 9900123456 |
+| USR_025 | 9845012345 |
+| USR_026 | 9900123456 |
+| USR_026 | 9845012345 |
+| USR_027 | 9900123456 |
+| USR_027 | 9845012345 |
+| USR_028 | 9900123456 |
+| USR_028 | 9845012345 |
+| USR_029 | 9900123456 |
+| USR_029 | 9845012345 |
+| USR_030 | 9900123456 |
+| USR_030 | 9845012345 |
++---------+------------+
+66 rows in set (0.001 sec)
+
+MariaDB [railwayreservation_410]> set autocommit = 0;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [railwayreservation_410]>

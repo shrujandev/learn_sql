@@ -1,0 +1,350 @@
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 70
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privileges on *.* to 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shrujan415 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 71
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+ERROR: Can't connect to the server
+
+unknown [(none)]> show databases;
+No connection. Trying to reconnect...
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+ERROR: Can't connect to the server
+
+unknown [(none)]> show databases;
+No connection. Trying to reconnect...
+Connection id:    8
+Current database: *** NONE ***
+
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| railwayticket_415  |
+| test               |
++--------------------+
+7 rows in set (0.002 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 129
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> revoke all privileges on *.* from 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shrujan415 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 130
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
++--------------------+
+1 row in set (0.001 sec)
+
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 131
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> grant all privillages on `company`.* to 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privillages on `company`.* to 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1030 (HY000): Got error 176 "Read page with wrong checksum" from storage engine Aria
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant all privileges on *.* to 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [(none)]> clear
+MariaDB [(none)]> exit
+Bye
+  bin    .\mysql -u shrujan415 -p
+Enter password: ***
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 148
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| railwayticket_415  |
+| test               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> use company;
+Database changed
+MariaDB [company]> show tables
+    -> ;
++-------------------+
+| Tables_in_company |
++-------------------+
+| branch            |
+| branch_supplier   |
+| client            |
+| employee          |
+| works_with        |
++-------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]> select * from employee;
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.000 sec)
+
+MariaDB [company]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 149
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> revoke all privilages on *.* to 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'privilages on *.* to 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> revoke all privileges on *.* from 'shrujan415'@'localhost';
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [(none)]> grant select,update on *.* from 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> grant select, update on *.* from 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> grant select,update on `company`.* from 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> grant select,update on `company`.* to 'shrujan415'@'localhost';
+ERROR 1034 (HY000): Index for table 'db' is corrupt; try to repair it
+MariaDB [(none)]> grant select,update on `company`.* from 'shrujan415'@'localhost';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from 'shrujan415'@'localhost'' at line 1
+MariaDB [(none)]> use complany
+ERROR 1049 (42000): Unknown database 'complany'
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> create table student(SRN int ,Name varchar(255),City varchar(255));
+Query OK, 0 rows affected (0.038 sec)
+
+MariaDB [company]> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| branch            |
+| branch_supplier   |
+| client            |
+| employee          |
+| student           |
+| works_with        |
++-------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [company]> insert into student values(1,'Ram','Bangal'),(2,'Ravi','Koramangala');
+Query OK, 2 rows affected (0.008 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [company]> select * from student;
++------+------+-------------+
+| SRN  | Name | City        |
++------+------+-------------+
+|    1 | Ram  | Bangal      |
+|    2 | Ravi | Koramangala |
++------+------+-------------+
+2 rows in set (0.000 sec)
+
+MariaDB [company]> insert into student values(3,'Ravina','Mumbai');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company]> select * from student;
++------+--------+-------------+
+| SRN  | Name   | City        |
++------+--------+-------------+
+|    1 | Ram    | Bangal      |
+|    2 | Ravi   | Koramangala |
+|    3 | Ravina | Mumbai      |
++------+--------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [company]> set autocommit=0
+    -> ;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [company]> start transactions;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'transactions' at line 1
+MariaDB [company]> insert into student values(4,'Ravisha','NYC');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [company]> select * from student;
++------+---------+-------------+
+| SRN  | Name    | City        |
++------+---------+-------------+
+|    1 | Ram     | Bangal      |
+|    2 | Ravi    | Koramangala |
+|    3 | Ravina  | Mumbai      |
+|    4 | Ravisha | NYC         |
++------+---------+-------------+
+4 rows in set (0.000 sec)
+
+MariaDB [company]> rollback
+    -> ;
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [company]> select * from student;
++------+--------+-------------+
+| SRN  | Name   | City        |
++------+--------+-------------+
+|    1 | Ram    | Bangal      |
+|    2 | Ravi   | Koramangala |
+|    3 | Ravina | Mumbai      |
++------+--------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [company]> savepoint sp1;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [company]> delete from student where SRN=1;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [company]> select * from student;
++------+--------+-------------+
+| SRN  | Name   | City        |
++------+--------+-------------+
+|    2 | Ravi   | Koramangala |
+|    3 | Ravina | Mumbai      |
++------+--------+-------------+
+2 rows in set (0.000 sec)
+
+MariaDB [company]> savepoint sp2;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [company]> rollback to sp1;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [company]> select * from student;
++------+--------+-------------+
+| SRN  | Name   | City        |
++------+--------+-------------+
+|    1 | Ram    | Bangal      |
+|    2 | Ravi   | Koramangala |
+|    3 | Ravina | Mumbai      |
++------+--------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [company]> use railwayticket_415;
+Database changed
+MariaDB [railwayticket_415]> show tables;
++-----------------------------+
+| Tables_in_railwayticket_415 |
++-----------------------------+
+| compartment_415             |
+| faretable_415               |
+| passenger_415               |
+| payment_415                 |
+| phone_415                   |
+| route_415                   |
+| ticket_415                  |
+| train_415                   |
+| user_415                    |
+| user_train_415              |
++-----------------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> exit
+Bye
+  bin   
