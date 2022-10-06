@@ -1,0 +1,216 @@
+Last login: Mon Oct  3 09:22:03 on ttys000
+➜  ~ cd /Applications/XAMPP/bin
+➜  bin ./mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 295
+Server version: 10.4.21-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> delimiter &&
+MariaDB [(none)]> create procedure get_max_sal ()
+    -> begin 
+    -> select * from employee where salary > 100000;
+    -> select count(emp_id) as Total_Employee from Employee;
+    -> end &&
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use company;
+ERROR 1049 (42000): Unknown database 'company;'
+MariaDB [(none)]> use company$$
+ERROR 1049 (42000): Unknown database 'company$$'
+MariaDB [(none)]> delimiter ;
+MariaDB [(none)]> use company;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [company]> delimiter $$
+MariaDB [company]> create procedure get_max_sal () begin  select * from employee where salary > 100000; select count(emp_id) as Total_Employee from Employee; end&&
+    -> 
+    -> ;
+    -> adfa
+    -> $$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '&&
+
+;
+adfa' at line 1
+MariaDB [company]> create procedure get_max_sal () begin  select * from employee where salary > 100000; select count(emp_id) as Total_Employee from Employee; end$$
+Query OK, 0 rows affected (0.079 sec)
+
+MariaDB [company]> call get_max_sal()
+    -> $$
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+2 rows in set (0.008 sec)
+
++----------------+
+| Total_Employee |
++----------------+
+|              9 |
++----------------+
+1 row in set (0.009 sec)
+
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [company]> delimiter $$
+MariaDB [company]> create procedure display_top_1() begin select * from employee where salary > 150000; select count(emp_id_ as Total_Employee from Employee; end$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as Total_Employee from Employee; end' at line 1
+MariaDB [company]> create procedure display_top_1() begin select * from employee where salary > 150000; select count(emp_id) as Total_Employee from Employee; end$$
+Query OK, 0 rows affected (0.079 sec)
+
+MariaDB [company]> create procedure get_employee(IN var1 INT)
+    -> begin
+    -> select * from employee limit var1;
+    -> select count(emp_id) as Total_Employeee from Employee;
+    -> End $$
+Query OK, 0 rows affected (0.078 sec)
+
+MariaDB [company]> call get_employee()
+    -> $$
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE company.get_employee; expected 1, got 0
+MariaDB [company]> call get_employee(1)
+    -> $$
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+1 row in set (0.004 sec)
+
++-----------------+
+| Total_Employeee |
++-----------------+
+|               9 |
++-----------------+
+1 row in set (0.004 sec)
+
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [company]> call get_employee(45)
+    -> $$
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M      |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M      |  78000 |      100 |         3 |
+|    107 | Andy       | Bernard   | 1973-07-22 | M      |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M      |  71000 |      106 |         3 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+9 rows in set (0.001 sec)
+
++-----------------+
+| Total_Employeee |
++-----------------+
+|               9 |
++-----------------+
+1 row in set (0.002 sec)
+
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [company]> call get_employee(5)$$
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | gender | salary | super_id | branch_id |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+|    100 | David      | Wallace   | 1967-11-17 | M      | 250000 |     NULL |         1 |
+|    101 | Jan        | Levinson  | 1961-05-11 | F      | 110000 |      100 |         1 |
+|    102 | Michael    | Scott     | 1964-03-15 | M      |  75000 |      100 |         2 |
+|    103 | Angela     | Martin    | 1971-06-25 | F      |  63000 |      102 |         2 |
+|    104 | Kelly      | Kapoor    | 1980-02-05 | F      |  55000 |      102 |         2 |
++--------+------------+-----------+------------+--------+--------+----------+-----------+
+5 rows in set (0.001 sec)
+
++-----------------+
+| Total_Employeee |
++-----------------+
+|               9 |
++-----------------+
+1 row in set (0.001 sec)
+
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [company]> delimiter ;
+MariaDB [company]> delimiter $$
+MariaDB [company]> create procedure display_max_sal(OUT highest_sal INT)
+    -> begin 
+    -> select max(salary) into highest_sal from employee;
+    -> end $$
+Query OK, 0 rows affected (0.079 sec)
+
+MariaDB [company]> use display_max_sal(@A)
+ERROR 1049 (42000): Unknown database 'display_max_sal(@A)'
+MariaDB [company]> call display_max_sal(@A)
+    -> ;
+    -> $$
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company]> delimiter ;
+MariaDB [company]> select(@A);
++--------+
+| (@A)   |
++--------+
+| 250000 |
++--------+
+1 row in set (0.001 sec)
+
+MariaDB [company]> delimiter $$
+MariaDB [company]> create procedure display_max_sal() begin select max(salary) from employee; end$$ 
+ERROR 1304 (42000): PROCEDURE display_max_sal already exists
+MariaDB [company]> create procedure display_max_sal_alt() begin select max(salary) from employee; end$$
+Query OK, 0 rows affected (0.077 sec)
+
+MariaDB [company]> call display_max_sal_alt()$$;
++-------------+
+| max(salary) |
++-------------+
+|      250000 |
++-------------+
+1 row in set (0.001 sec)
+
+Query OK, 0 rows affected (0.001 sec)
+
+    -> $$
+ERROR 1065 (42000): Query was empty
+MariaDB [company]> create procedure display_salary(inout var1 int)
+    -> begin 
+    -> select salary into var1 where emp_id = var1;
+    -> end $$
+Query OK, 0 rows affected (0.078 sec)
+
+MariaDB [company]> set @A = '105'$$
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [company]> call display_salary(@A)$$
+ERROR 1054 (42S22): Unknown column 'salary' in 'field list'
+MariaDB [company]> create procedure display_salary(inout var1 int) begin select salary into var1 from employee where emp_id = var1; end$$
+ERROR 1304 (42000): PROCEDURE display_salary already exists
+MariaDB [company]> drop procedure display_salary$$
+Query OK, 0 rows affected (0.081 sec)
+
+MariaDB [company]> create procedure display_salary(inout var1 int) begin select salary into var1 from employee where emp_id = var1; end$$
+Query OK, 0 rows affected (0.077 sec)
+
+MariaDB [company]> call display_salary(@A)$$
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [company]> select (@A)$$
++-------+
+| (@A)  |
++-------+
+| 69000 |
++-------+
+1 row in set (0.001 sec)
+
+MariaDB [company]> delimiter ;
+MariaDB [company]> 
