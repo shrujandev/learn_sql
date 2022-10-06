@@ -1,0 +1,231 @@
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> create table employee_age(age INT,Name varchar(255));
+Query OK, 0 rows affected (0.042 sec)
+
+MariaDB [company]> create trigger employeeage before insert on employee_age for each row
+    -> begin;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+MariaDB [company]> delimiter //
+MariaDB [company]> create trigger employeeage before insert on employee_age for each row
+    -> begin
+    -> if new.age < 0 then set new.age=0;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [company]> delimiter;
+    -> ;
+    -> delimiter ;
+    -> ;
+    ->
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'delimiter;;
+delimiter' at line 1
+MariaDB [company]> delimiter ;
+MariaDB [company]> insert into employee_age(age,Name) values (40,'Ram');
+Query OK, 1 row affected (0.090 sec)
+
+MariaDB [company]> insert into employee_age(age,Name) values (-10,'Harsh');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company]> select * from employee_age;
++------+-------+
+| age  | Name  |
++------+-------+
+|   40 | Ram   |
+|    0 | Harsh |
++------+-------+
+2 rows in set (0.004 sec)
+
+MariaDB [company]> select * from employee_age;
++------+-------+
+| age  | Name  |
++------+-------+
+|   40 | Ram   |
+|    0 | Harsh |
++------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [company]> select * from employee_age;
++------+-------+
+| age  | Name  |
++------+-------+
+|   40 | Ram   |
+|    0 | Harsh |
++------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [company]> select * from employee_age;
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+ERROR: Can't connect to the server
+
+unknown [company]> select * from employee_age;
+No connection. Trying to reconnect...
+Connection id:    8
+Current database: company
+
++------+-------+
+| age  | Name  |
++------+-------+
+|   40 | Ram   |
+|    0 | Harsh |
++------+-------+
+2 rows in set (0.005 sec)
+
+MariaDB [company]> select * from employee_age;
++------+-------+
+| age  | Name  |
++------+-------+
+|   40 | Ram   |
+|    0 | Harsh |
++------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [company]> delimiter //
+MariaDB [company]> create procedure exampleproc5()
+    -> begin
+    -> declare done int default 0;
+    -> declare branch integer;
+    -> declare branch_name,mgr_id, mgr_start_date varchar(255);
+    -> declare cur cursor for select * from branch;
+    -> declare continue handler for not found set done =1;
+    -> open cur;
+    -> label: LOOP
+    -> FETCH cur into branch_id,branch_name,mgr_id,mgr_start_date;
+    -> if done =1 then leave label;
+    -> end if;
+    -> insert into backup values(branch_id,branch_name,mgr_id,mgr_start_date);
+    -> end LOOP
+    -> ;
+    -> close cur;
+    -> end; //
+ERROR 1327 (42000): Undeclared variable: branch_id
+MariaDB [company]> select * from branch
+    -> ;
+    -> //
++-----------+-------------+--------+----------------+
+| branch_id | branch_name | mgr_id | mgr_start_date |
++-----------+-------------+--------+----------------+
+|         1 | Corporate   |    100 | 2006-02-09     |
+|         2 | Scranton    |    102 | 1992-04-06     |
+|         3 | Stamford    |    106 | 1998-02-13     |
+|         4 | Buffalo     |   NULL | NULL           |
++-----------+-------------+--------+----------------+
+4 rows in set (0.052 sec)
+
+MariaDB [company]> create procedure exampleproc5()
+    -> begin
+    -> declare done int default 0;
+    -> declare branch_id integer;
+    -> declare branch_name,mgr_id, mgr_start_date varchar(255);
+    -> declare cur cursor for select * from branch;
+    -> declare continue handler for not found set done =1;
+    -> open cur;
+    -> label: LOOP
+    -> FETCH cur into branch_id,branch_name,mgr_id,mgr_start_date;
+    -> if done =1 then leave label;
+    -> end if;
+    -> insert into backup values(branch_id,branch_name,mgr_id,mgr_start_date);
+    -> end LOOP
+    -> ;
+    -> close cur;
+    -> end; //
+Query OK, 0 rows affected (0.034 sec)
+
+MariaDB [company]> delimiter ;
+MariaDB [company]> create table backup(branch_id int,branch_name varchar(30),mgr_id int,mgr_start_date date);
+Query OK, 0 rows affected (0.091 sec)
+
+MariaDB [company]> call emampleproc5
+    -> ;
+ERROR 1305 (42000): PROCEDURE company.emampleproc5 does not exist
+MariaDB [company]> call exampleproc5;
+Query OK, 4 rows affected (0.074 sec)
+
+MariaDB [company]> select * from backup;
++-----------+-------------+--------+----------------+
+| branch_id | branch_name | mgr_id | mgr_start_date |
++-----------+-------------+--------+----------------+
+|         1 | Corporate   |    100 | 2006-02-09     |
+|         2 | Scranton    |    102 | 1992-04-06     |
+|         3 | Stamford    |    106 | 1998-02-13     |
+|         4 | Buffalo     |   NULL | NULL           |
++-----------+-------------+--------+----------------+
+4 rows in set (0.000 sec)
+
+MariaDB [company]> select * from branch;
++-----------+-------------+--------+----------------+
+| branch_id | branch_name | mgr_id | mgr_start_date |
++-----------+-------------+--------+----------------+
+|         1 | Corporate   |    100 | 2006-02-09     |
+|         2 | Scranton    |    102 | 1992-04-06     |
+|         3 | Stamford    |    106 | 1998-02-13     |
+|         4 | Buffalo     |   NULL | NULL           |
++-----------+-------------+--------+----------------+
+4 rows in set (0.000 sec)
+
+MariaDB [company]> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| backup            |
+| branch            |
+| branch_supplier   |
+| client            |
+| empdetails        |
+| employee          |
+| employee_age      |
+| newemp            |
+| newempf           |
+| student           |
+| wc_info           |
+| works_with        |
++-------------------+
+12 rows in set (0.006 sec)
+
+MariaDB [company]> select * from empdetails;
+Empty set (0.000 sec)
+
+MariaDB [company]> exit
+Bye
+  bin    .\mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 15
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> select * from empdetails;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use company
+Database changed
+MariaDB [company]> select * from empdetails;
+Empty set (0.000 sec)
+
+MariaDB [company]> select * from empdetails;
++-------+---------+
+| empno | empname |
++-------+---------+
+|     1 | Reena   |
+|     2 | Reetta  |
+|     3 | Rekha   |
++-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [company]>
