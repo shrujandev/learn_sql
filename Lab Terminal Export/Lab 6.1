@@ -1,0 +1,371 @@
+  bin    ./mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++------------------------+
+| Database               |
++------------------------+
+| company                |
+| information_schema     |
+| mysql                  |
+| new_company            |
+| performance_schema     |
+| phpmyadmin             |
+| railwayreservation_410 |
+| railwayticket_415      |
+| test                   |
++------------------------+
+9 rows in set (0.048 sec)
+
+MariaDB [(none)]> use railwayticket_415;
+Database changed
+MariaDB [railwayticket_415]> show tables;
++-----------------------------+
+| Tables_in_railwayticket_415 |
++-----------------------------+
+| compartment_415             |
+| faretable_415               |
+| passenger_415               |
+| payment_415                 |
+| phone_415                   |
+| route_415                   |
+| ticket_415                  |
+| train_415                   |
+| user_415                    |
+| user_train_415              |
++-----------------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from route_415;
++-------------+-----------+------------+------------+----------+----------+
+| From_STN_No | To_STN_No | From_STN   | To_STN     | Distance | Train_No |
++-------------+-----------+------------+------------+----------+----------+
+|           1 |         2 | Bengaluru  | Bangarpet  |       71 |    62621 |
+|           2 |         3 | Bangarpet  | Katpadi    |      161 |    62621 |
+|           3 |         4 | Katpadi    | Sholigur   |       40 |    62621 |
+|           4 |         5 | Sholingur  | Chennai    |       90 |    62621 |
+|           1 |         3 | Bengaluru  | Katpadi    |      232 |    62621 |
+|           1 |         4 | Bengaluru  | Sholigur   |      272 |    62621 |
+|           1 |         5 | Bengaluru  | Chennai    |      362 |    62621 |
+|           2 |         4 | Bangarpet  | Sholigur   |      201 |    62621 |
+|           2 |         5 | Bangarpet  | Chennai    |      291 |    62621 |
+|           3 |         5 | Katpadi    | Chennai    |      130 |    62621 |
+|           1 |         2 | Chennai    | Sholingur  |       90 |    62620 |
+|           2 |         3 | Sholingur  | Katpadi    |       39 |    62620 |
+|           3 |         4 | Katpadi    | Bangarpet  |      161 |    62620 |
+|           4 |         5 | Bangarpet  | Bengaluru  |       71 |    62620 |
+|           1 |         3 | Chennai    | Katpadi    |      129 |    62620 |
+|           1 |         4 | Chennai    | Bangarpet  |      290 |    62620 |
+|           1 |         5 | Chennai    | Bengaluru  |      361 |    62620 |
+|           2 |         4 | Sholingur  | Bangarpet  |      200 |    62620 |
+|           2 |         5 | Sholingur  | Chennai    |      271 |    62620 |
+|           3 |         5 | Katpadi    | Chennai    |      232 |    62620 |
+|           1 |         2 | Chennai    | Palakkad   |      130 |    25261 |
+|           2 |         3 | Palakkad   | Kannur     |      220 |    25261 |
+|           3 |         4 | Kannur     | Mangaluru  |      131 |    25261 |
+|           1 |         3 | Chennai    | Kannur     |      350 |    25261 |
+|           1 |         4 | Chennai    | Mangaluru  |      481 |    25261 |
+|           2 |         4 | Palakkad   | Mangaluru  |      351 |    25261 |
+|           1 |         2 | Mangaluru  | Kannur     |      131 |    25260 |
+|           2 |         3 | Kannur     | Palakkad   |      220 |    25260 |
+|           4 |         4 | Palakkad   | Chennai    |      130 |    25260 |
+|           1 |         3 | Mangaluru  | Palakkad   |      351 |    25260 |
+|           1 |         4 | Mangaluru  | Chennai    |      481 |    25260 |
+|           2 |         4 | Kannur     | Chennai    |      350 |    25260 |
+|           1 |         2 | Bengaluru  | Mysore     |      139 |    58451 |
+|           2 |         3 | Mysore     | Subramanya |      170 |    58451 |
+|           3 |         4 | Subramanya | Mangaluru  |      194 |    58451 |
+|           1 |         3 | Bengaluru  | Subramanya |      309 |    58451 |
+|           1 |         4 | Bengaluru  | Mangaluru  |      503 |    58451 |
+|           2 |         4 | Mysore     | Mangaluru  |      364 |    58451 |
+|           1 |         2 | Mangaluru  | Subramanya |      195 |    58450 |
+|           2 |         3 | Subramanya | Mysore     |      170 |    58450 |
+|           3 |         4 | Mysore     | Bengaluru  |      139 |    58450 |
+|           1 |         3 | Mangaluru  | Mysore     |      365 |    58450 |
+|           1 |         4 | Mangaluru  | Bengaluru  |      504 |    58450 |
+|           2 |         4 | Subramanya | Bengaluru  |      309 |    58450 |
++-------------+-----------+------------+------------+----------+----------+
+44 rows in set (0.114 sec)
+
+MariaDB [railwayticket_415]> select average(Distance) as Average from route_415;
+ERROR 1305 (42000): FUNCTION railwayticket_415.average does not exist
+MariaDB [railwayticket_415]> select AVG(Distance) as Average from route_415;
++----------+
+| Average  |
++----------+
+| 235.9318 |
++----------+
+1 row in set (0.008 sec)
+
+MariaDB [railwayticket_415]> select AVG(Distance) as Average from route_415 GROUP BY Train_No;
++----------+
+| Average  |
++----------+
+| 277.1667 |
+| 277.1667 |
+| 280.3333 |
+| 279.8333 |
+| 184.4000 |
+| 185.0000 |
++----------+
+6 rows in set (0.006 sec)
+
+MariaDB [railwayticket_415]> select Train_no,AVG(Distance) as Average from route_415 GROUP BY Train_No;
++----------+----------+
+| Train_no | Average  |
++----------+----------+
+|    25260 | 277.1667 |
+|    25261 | 277.1667 |
+|    58450 | 280.3333 |
+|    58451 | 279.8333 |
+|    62620 | 184.4000 |
+|    62621 | 185.0000 |
++----------+----------+
+6 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Train_no as Train,From_STN as From,To_STN as To,AVG(Distance) as Average from route_415 GROUP BY (From_STN,To_STN,Train_No);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'From,To_STN as To,AVG(Distance) as Average from route_415 GROUP BY (From_STN,...' at line 1
+MariaDB [railwayticket_415]> select Train_no as Train,From_STN_No as From,To_STN_No as To,AVG(Distance) as Average from route_415 GROUP BY (From_STN_No,To_STN_No,Train_No);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'From,To_STN_No as To,AVG(Distance) as Average from route_415 GROUP BY (From_S...' at line 1
+MariaDB [railwayticket_415]> select Train_no,AVG(Distance) as Average from route_415 GROUP BY Train_No Order by DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'DESC' at line 1
+MariaDB [railwayticket_415]> select Train_no,AVG(Distance) as Average from route_415 order by GROUP BY Train_No;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'GROUP BY Train_No' at line 1
+MariaDB [railwayticket_415]> select Train_no,AVG(Distance) as Average from route_415 order by DESC GROUP BY Train_No;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'DESC GROUP BY Train_No' at line 1
+MariaDB [railwayticket_415]> select Train_no,AVG(Distance) as Average from route_415 GROUP BY Train_No;
++----------+----------+
+| Train_no | Average  |
++----------+----------+
+|    25260 | 277.1667 |
+|    25261 | 277.1667 |
+|    58450 | 280.3333 |
+|    58451 | 279.8333 |
+|    62620 | 184.4000 |
+|    62621 | 185.0000 |
++----------+----------+
+6 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select Train_no,AVG(Distance) as Average from route_415 GROUP BY Train_No Order by (Average) DESC;
++----------+----------+
+| Train_no | Average  |
++----------+----------+
+|    58450 | 280.3333 |
+|    58451 | 279.8333 |
+|    25260 | 277.1667 |
+|    25261 | 277.1667 |
+|    62621 | 185.0000 |
+|    62620 | 184.4000 |
++----------+----------+
+6 rows in set (0.006 sec)
+
+MariaDB [railwayticket_415]> select Train_no,SUM(Distance) as Total_Distance from route_415 GROUP BY Train_No Order by (Total_Distance) DESC;
++----------+----------------+
+| Train_no | Total_Distance |
++----------+----------------+
+|    62621 |           1850 |
+|    62620 |           1844 |
+|    58450 |           1682 |
+|    58451 |           1679 |
+|    25261 |           1663 |
+|    25260 |           1663 |
++----------+----------------+
+6 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> show tabels
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'tabels' at line 1
+MariaDB [railwayticket_415]> show tables
+    -> ;
++-----------------------------+
+| Tables_in_railwayticket_415 |
++-----------------------------+
+| compartment_415             |
+| faretable_415               |
+| passenger_415               |
+| payment_415                 |
+| phone_415                   |
+| route_415                   |
+| ticket_415                  |
+| train_415                   |
+| user_415                    |
+| user_train_415              |
++-----------------------------+
+10 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select * from compartment_415;
++----------------+------------------+----------+-------------+----------+
+| Compartment_No | Compartment_Type | Capacity | Availabilty | Train_No |
++----------------+------------------+----------+-------------+----------+
+| F01            | I Class          |       16 |           0 |    25260 |
+| F01            | I Class          |       16 |           0 |    25261 |
+| F01            | I Class          |       16 |           4 |    58450 |
+| F01            | I Class          |       16 |           5 |    58451 |
+| F01            | I Class          |       16 |          15 |    62620 |
+| F01            | I Class          |       16 |           6 |    62621 |
+| F02            | I Class          |       16 |           0 |    62620 |
+| G01            | III Class        |       60 |          33 |    25261 |
+| G01            | III Class        |       60 |           2 |    58450 |
+| G01            | III Class        |       60 |          40 |    58451 |
+| G01            | III Class        |       60 |          10 |    62621 |
+| G02            | III Class        |       60 |          45 |    25261 |
+| G02            | III Class        |       60 |          12 |    62621 |
+| S01            | II Class         |       30 |          15 |    25260 |
+| S01            | II Class         |       30 |          15 |    25261 |
+| S01            | II Class         |       30 |           5 |    58450 |
+| S01            | II Class         |       30 |           4 |    62621 |
+| S02            | II Class         |       30 |          17 |    25260 |
+| S02            | II Class         |       30 |           3 |    58450 |
+| S02            | II Class         |       30 |           6 |    62621 |
++----------------+------------------+----------+-------------+----------+
+20 rows in set (0.041 sec)
+
+MariaDB [railwayticket_415]> select * from train_415;
++----------+------------------+------------+-----------+-------------+--------------+
+| Train_No | Name             | Train_Type | Source    | Destination | Availability |
++----------+------------------+------------+-----------+-------------+--------------+
+|    25260 | Chennai Mail     | Mail       | Mangaluru | Chennai     | Yes          |
+|    25261 | Managaluru Mail  | Mail       | Chennai   | Mangaluru   | Yes          |
+|    58450 | MAN-BEN Express  | Fast       | Mangaluru | Bengaluru   | yes          |
+|    58451 | BEN-MAN Express  | Fast       | Bengaluru | Mangaluru   | yes          |
+|    62620 | CHE-BEN Shatabdi | Superfast  | Chennai   | Bengaluru   | No           |
+|    62621 | BEN-CHE Shatabdi | Superfast  | Bengaluru | Chennai     | yes          |
++----------+------------------+------------+-----------+-------------+--------------+
+6 rows in set (0.025 sec)
+
+MariaDB [railwayticket_415]> select * from compartment where train_no in (select train_no from compartment where count(train_no) = min(count(tra
+in_no));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select * from compartment where train_no in (select train_no from compartment where count(train_no) = min(count(train_no) group by train_no);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'group by train_no)' at line 1
+MariaDB [railwayticket_415]> select train_no,count(train_no) from compartment where train_no in (select train_no from compartment where count(train_no) = min(count(train_no)) group by train_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select train_no,count(train_no) as countStuff from compartment where train_no in (select train_no from compartmentwhere count(train_no) = min(countStuff);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select train_no,count(train_no) as countStuff from compartment where train_no in (select train_no from compartmentwhere count(train_no) = min(countStuff) group by train_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select train_no,count(train_no) as countStuff from compartment_415 where train_no in (select train_no from compartment where count(train_no) = min(countStuff) group by train_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select train_no,count(train_no) as countStuff from compartment_415 where train_no in (select train_no from compartment_415 where count(train_no) = min(countStuff) group by train_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select count(train_no),train_no from compartment_415 where count(train_no) = min(count(train_no)) group by train_no;
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [railwayticket_415]> select count(train_no),train_no from compartment_415 where count(train_no) = min(count(train_no));
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [railwayticket_415]> select count(train_no),train_no from compartment_415;
++-----------------+----------+
+| count(train_no) | train_no |
++-----------------+----------+
+|              20 |    25260 |
++-----------------+----------+
+1 row in set (0.003 sec)
+
+MariaDB [railwayticket_415]> select count(train_no),train_no from compartment_415 group by train_no;
++-----------------+----------+
+| count(train_no) | train_no |
++-----------------+----------+
+|               3 |    25260 |
+|               4 |    25261 |
+|               4 |    58450 |
+|               2 |    58451 |
+|               2 |    62620 |
+|               5 |    62621 |
++-----------------+----------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 where train_no in(select train_no from compartment_415 where count_no=min(couunt_no))group by train_no;
+ERROR 1054 (42S22): Unknown column 'count_no' in 'where clause'
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 where train_no in(select train_no from compartment_415 where count_no=min(count_no))group by train_no;
+ERROR 1054 (42S22): Unknown column 'count_no' in 'where clause'
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no from compartment_415 where M.count_no=min(M.count_no))group by train_no;
+ERROR 1054 (42S22): Unknown column 'M.count_no' in 'where clause'
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no from compartment_415 where count(train_no)=min(count(train_no))group by train_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no from compartment_415 where count(train_no)=min(count(train_no) group by train_no)group by train_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'group by train_no)group by train_no' at line 1
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no from compartment_415 where count(train_no) as M =min(count(train_no)) group by train_no)group by train_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'as M =min(count(train_no)) group by train_no)group by train_no' at line 1
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no from compartment_415 where count(train_no) =min(count(train_no)) group by train_no)group by train_no;
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no,count(train_no) as M from compartment_415 where M=min(M) group by train_no)group by train_no;
+ERROR 1054 (42S22): Unknown column 'M' in 'where clause'
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no from compartment_415 where count(train_no) = 3);
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [railwayticket_415]> select count(train_no) as count_no,train_no from compartment_415 M where train_no in(select train_no from compartment_415 where count(*) = 3);
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [railwayticket_415]> select * from (select train_no,count(train_no) as C from compartment_415 group by (train_no)) where c=min(c) ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near 'where c=min(c)' at line 1
+MariaDB [railwayticket_415]> select * from (select train_no,count(train_no) as C from compartment_415 group by (train_no));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select * from (select train_no,count(train_no) as C from compartment_415);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntaxto use near '' at line 1
+MariaDB [railwayticket_415]> select count(train_no),train_no from compartment_415;
++-----------------+----------+
+| count(train_no) | train_no |
++-----------------+----------+
+|              20 |    25260 |
++-----------------+----------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select count(train_no),train_no from compartment_415 group by train_no;
++-----------------+----------+
+| count(train_no) | train_no |
++-----------------+----------+
+|               3 |    25260 |
+|               4 |    25261 |
+|               4 |    58450 |
+|               2 |    58451 |
+|               2 |    62620 |
+|               5 |    62621 |
++-----------------+----------+
+6 rows in set (0.000 sec)
+
+MariaDB [railwayticket_415]> select count(train_no),train_no from compartment_415 group by train_no having count(train_no) = min(count(train_no));
+ERROR 1111 (HY000): Invalid use of group function
+MariaDB [railwayticket_415]> select count(train_no) as count,train_no from compartment_415 group by train_no having count = min(count);
+Empty set (0.003 sec)
+
+MariaDB [railwayticket_415]> select count(train_no) as count,train_no from compartment_415 group by train_no having count = 3;
++-------+----------+
+| count | train_no |
++-------+----------+
+|     3 |    25260 |
++-------+----------+
+1 row in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select count(train_no) as count,train_no,min(count) from compartment_415 group by train_no;
+ERROR 1054 (42S22): Unknown column 'count' in 'field list'
+MariaDB [railwayticket_415]> select count(train_no) as count,train_no from compartment_415 group by train_no having min(count);
++-------+----------+
+| count | train_no |
++-------+----------+
+|     4 |    25261 |
+|     4 |    58450 |
+|     2 |    58451 |
+|     2 |    62620 |
+|     5 |    62621 |
++-------+----------+
+5 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]> select count(train_no) as count,train_no from compartment_415 group by train_no ;
++-------+----------+
+| count | train_no |
++-------+----------+
+|     3 |    25260 |
+|     4 |    25261 |
+|     4 |    58450 |
+|     2 |    58451 |
+|     2 |    62620 |
+|     5 |    62621 |
++-------+----------+
+6 rows in set (0.001 sec)
+
+MariaDB [railwayticket_415]>
